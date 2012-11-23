@@ -1,0 +1,53 @@
+Informatiile de aici sunt valabile pentru windows.
+Acest fisier foloseste drept ghid pentru membrii echipei, insa si pentru cei care
+vor sa foloseasca mai departe aplicatia si au nevoie de informatii legat de instalare
+tehnologii.
+
+Flux deployere aplicatie:
+
+Folosim maven, presupunem ca lucram pe windows:
+Se instaleaza maven(Voi uploada un alt fisier pentru instructiuni instalare maven)
+Presupunem ca avem proiectul luat de pe git.
+In folderul proiectului se ruleaza comanda
+mvn eclipse:eclipse pentru a genera un proiect pentru eclipse.
+Se importa proiectul in eclipse.
+
+In primul rand trebuie configurat fisierul config.properties; acesta este
+fisierul pentru configurarea folderelor aplciatiei.Acesta se gaseste in 
+src/main/resources si contine explicatii referitoare la configurarea sa.
+
+Exista doua posibilitati de rulare:
+I)Folosind serverul nostru tomcat 
+
+1)Se instaleaza tomcat.
+Link download http://tomcat.apache.org/download-70.cgi
+Se alege de la BinaryDistributions Core versiunea care va trebuie,
+respectiv 32-zip Windows.zip sau 64-zip Windows.zip.
+Se dezarhiveaza arhiva in ce folder doriti(sa presupunem D:\install\tomcat7)
+Trebuie modificat fisierul tomcat-users.xml din folderul
+D:\installs\tomcat7\conf.Aceasta modificare trebuie sa aibe loc pentru a 
+avea drepturi.
+O sa uploadez un exemplu ala acestui fisier pentru userul "admin", 
+parola "password".  
+
+2)In cmd, in folderul cu proiectul(acelasi folder unde este si fisierul 
+pom.xml) rulam comanda 
+mvn clean compile war:exploded - se va genera un folder ocrwebmanager in folderul
+target al proiectului ce va contine aplicatia gata pentru a fi deployata.
+
+Se copiaza folderul ocrwebmanager in folderul de instalare tomcat\webapps.
+
+3)Se porneste tomcat:
+in cmd(in folderul de instalare tomcat)  comanda startup. 
+
+II)Folosind tomcatul mavenului.
+1)In cmd, in folderul cu proiectul(acelasi folder unde este si fisierul 
+pom.xml) rulam comanda 
+mvn clean install - buildeste aplicatia, o impacheteaza si rezultatele sunt
+in folderul target.
+mvn tomcat:run - porneste server de tomcat cu aplicatia deployata
+
+In ambele cazuri se deschide aplicatia in browser adresa 
+localhost:8080/ocrwebmanager
+
+Eu recomand sa nu folosim tomcatul maven-ului(nu e versiunea 7).

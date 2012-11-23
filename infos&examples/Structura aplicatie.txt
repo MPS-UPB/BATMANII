@@ -1,0 +1,46 @@
+Structura aplicatie:
+
+Proiect : DocumentProcessingWebManager
+
+Fisier pom.xml ( am adaugat unele dependinte; pe viitor daca doriti sa 
+folositi diverse jar-uri adaugati dependintele in acest fisier).
+Identificare aplicatia noastra:
+	<groupId>com.mps.batmanii</groupId>
+	<artifactId>ocrwebmanager</artifactId>
+	<name>ocrwebmanager</name>
+	<packaging>war</packaging>
+	<version>1.0.0</version>
+Aplicatia va avea numele ocrwebmanager.
+
+Structura de directoare este specifica maven.
+
+In src/main/webapp/WEB-INF este aflat fisierul web.xml.
+Este declarat DispatcherServlet-ul ce are drept fisier de configurare
+src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
+
+In src/main/resources este fisierul applicationContext.xml pentru 
+configurari bean-uri.
+De asemenea este si fisierul config.properties, fisierul pentru
+configurarea celor 3 foldere cerute de specificatii, precum si
+fisierul log4j.xml pentru configurare logging.
+
+In src/main/java - codul dispus in urmatoarele pachete:
+com.mps.batmanii.ocrwebmanager.beans - aici declaram bean-urile
+com.mps.batmanii.ocrwebmanager.business - aici scriem clasele de service,
+										business
+com.mps.batmanii.ocrwebmanager.controller - aici scriem controllerele
+Pe viitor putem refactoriza codul pentru a adauga si interfete pentru
+clasele de service.
+
+In src/main/webapp/WEB-INF/views vor fi aflate fisierele .jsp - 
+view-urile aplicatiei.
+View-urile vor fi urmatoarele(in principiu avem nevoie de 3):
+index.jsp - prima pagina (in care userul uploadeaza imaginile)
+ocr.jsp - a doua pagina (in care userul selecteaza executabile si
+completeaza parametrii)
+result.jsp - a treia pagina(in care userul downloadeaza rezultatele). 
+
+Sunt adaugate si 3 clase de tip controller pentru fiecare jsp in parte,
+in pachetul corespunzator.
+
+Pe viitor vom modifica in functie de necesitati.
