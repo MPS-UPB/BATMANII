@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/head.jsp"%>
 <title>ocrwebmanager</title>
 </head>
-<body id="page1">
+<body id="page2">
 	<!--==============================header=================================-->
     <header>
     <div class="row-top">
