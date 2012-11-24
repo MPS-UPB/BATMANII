@@ -1,18 +1,35 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<html>
-<head>
-<title>OCR WEB MANAGER</title>
+<%@ include file="/WEB-INF/views/head.jsp"%>
+<title>ocrwebmanager</title>
 </head>
-<body>
-
-	<h1>Welcome user</h1>
-	<h2>Input schemas folder is ${propertyHolder.inputSchemasFolder}</h2>
-	<h2>Output schemas folder is ${propertyHolder.outputSchemasFolder}</h2>
-	<h2>Execs folder is ${propertyHolder.execsFolder}</h2>
-	<h2>Uploaded images folder is ${propertyHolder.uploadedImagesFolder}</h2>
-</body>
-</html>
+<body id="page1">
+	<!--==============================header=================================-->
+    <header>
+    <div class="row-top">
+		<div class="main">
+			<div class="wrapper">
+				<h1>
+					<a href="#"><span>Batmanii</span></a>
+				</h1>
+			</div>
+		</div>
+	</div>
+        <div class="row-bot">
+        	<div class="row-bot-bg">
+            	<div class="main">
+                	<h2>Web based <span>Document Processing Manager</span></h2>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+	<!--==============================content================================-->
+    <section id="content"><div class="ic"></div>
+        <div class="main">
+            <div class="wrapper">
+    		<a class="button-1" href="#">Proba buton</a>
+            </div>
+        </div>
+    </section>
+    
+	<%@ include file="/WEB-INF/views/footer.jsp"%>
+	
