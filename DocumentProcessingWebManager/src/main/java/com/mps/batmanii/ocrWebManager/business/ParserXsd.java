@@ -18,6 +18,7 @@ import com.mps.batmanii.ocrWebManager.beans.Component;
 import com.mps.batmanii.ocrWebManager.beans.ElementType;
 import com.mps.batmanii.ocrWebManager.beans.GroupType;
 import com.mps.batmanii.ocrWebManager.beans.SimpleType;
+import com.mps.batmanii.ocrWebManager.beans.XsdFile;
 import com.sun.xml.xsom.XSAttributeUse;
 import com.sun.xml.xsom.XSComplexType;
 import com.sun.xml.xsom.XSContentType;
@@ -36,6 +37,68 @@ public class ParserXsd {
 	public static void main(String args[]) throws SAXException, IOException {
 		ParserXsd rr = new ParserXsd();
 		rr.parseSchema();
+	}
+
+	public XsdFile parse(String filename) throws SAXException, IOException {
+		XsdFile xsdFile = new XsdFile(filename);
+		ParserXsd rr = new ParserXsd();
+
+		File file = new File(filename);
+		LinkedList<ElementType> elementList = new LinkedList<ElementType>();
+		LinkedList<SimpleType> simpleList = new LinkedList<SimpleType>();
+		LinkedList<ComplexType> complexTypes = new LinkedList<ComplexType>();
+
+		XSOMParser parser = new XSOMParser();
+		parser.parse(file);
+		XSSchemaSet sset = parser.getResult();
+		XSSchema gtypesSchema = sset.getSchema(1);
+
+		Iterator<XSComplexType> ctiter = gtypesSchema.iterateComplexTypes();
+		while (ctiter.hasNext()) {
+			XSComplexType ct = (XSComplexType) ctiter.next();
+			complexTypes.add(printElements(ct));
+		}
+		for (int i = 0; i < complexTypes.size(); i++)
+
+			System.out.println(complexTypes.get(i));
+
+		// Parse simpleType tag ;
+		Map<String, com.sun.xml.xsom.XSSimpleType> simpleTypes = gtypesSchema
+				.getSimpleTypes();
+		Set<Entry<String, com.sun.xml.xsom.XSSimpleType>> entrySet = simpleTypes
+				.entrySet();
+		Object[] array = entrySet.toArray();
+		for (int i = 0; i < array.length; i++) {
+			simpleList
+					.add(parseSimpleType(((Entry<String, com.sun.xml.xsom.XSSimpleType>) array[i])
+							.getValue()));
+		}
+		System.out.println(simpleList);
+
+		gtypesSchema.getElementDecls();
+		Map<String, XSElementDecl> elementDecls = gtypesSchema
+				.getElementDecls();
+		Set<Entry<String, XSElementDecl>> entrySet2 = elementDecls.entrySet();
+		Object[] array2 = entrySet2.toArray();
+
+		for (int i = 0; i < array2.length; i++) {
+			Entry<String, com.sun.xml.xsom.XSElementDecl> aux = (Entry<String, com.sun.xml.xsom.XSElementDecl>) array2[i];
+			XSElementDecl e = (XSElementDecl) aux.getValue();
+			XSType t = e.getType();
+			XSComplexType xsComplexType = (XSComplexType) t;
+			elementList
+					.add(new ElementType(printElements(xsComplexType), null,
+							new Component(aux.getKey(), aux.getValue()
+									.getType(), 0, 0)));
+		}
+		for (int i = 0; i < elementList.size(); i++)
+			System.out.println(elementList);
+		xsdFile.setComplexTypes(complexTypes);
+		xsdFile.setElementType(elementList.get(0));
+		xsdFile.setSimpleTypes(simpleList);
+		xsdFile.setGroupTypes(null);
+		return xsdFile;
+
 	}
 
 	// parse one simpleType element
@@ -127,9 +190,7 @@ public class ParserXsd {
 									.getMinOccurs(), p.getMaxOccurs())));
 				}
 			}
-
 		}
-
 		return new GroupType(groupElement);
 	}
 
@@ -258,6 +319,5 @@ public class ParserXsd {
 		for (int i = 0; i < elementList.size(); i++)
 
 			System.out.println(elementList);
-
 	}
 }
