@@ -1,5 +1,6 @@
 package com.mps.batmanii.ocrWebManager.beans;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.mps.batmanii.ocrWebManager.business.PropertyHolderFactory;
 
 /**
  * Clasa bean ce contine toate obiectele de tip XsdFile, corespunzatoare
@@ -42,6 +45,11 @@ public class XsdContainer {
 		logger.info("Directorul de input al schemelor: "
 				+ propertyHolder.getInputSchemasFolder());
 		// ToDo - citire fisiere din director si parsare
+		
+		File folder = new File(propertyHolder.getInputSchemasFolder());
+		for(File fileEntry : folder.listFiles()){
+			logger.info(fileEntry.getAbsolutePath());
+		}
 	}
 
 	public List<XsdFile> getXsdFiles() {
