@@ -9,27 +9,30 @@
               http://www.springframework.org/schema/tx
               http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
-	<context:component-scan base-package="com.mps.batmanii.ocrWebManager" />
+	<context:component-scan base-package="com.mps.batmanii.ocrWebManager.bussiness" />
+	<context:component-scan base-package="com.mps.batmanii.ocrWebManager.beans" />
 
 	<context:annotation-config />
-	
+
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-
 	</bean>
-	
+
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 		p:location="classpath:config.properties" />
 
 	<!-- Local Data Holder -->
 	<bean id="propertyHolder" class="com.mps.batmanii.ocrWebManager.beans.PropertyHolder"
-	scope="prototype">	
+		scope="prototype">
 		<property name="inputSchemasFolder" value="${config.inputSchemasFolder}" />
 		<property name="outputSchemasFolder" value="${config.outputSchemasFolder}" />
 		<property name="execsFolder" value="${config.execsFolder}" />
 		<property name="uploadedImagesFolder" value="${config.uploadedImagesFolder}" />
 	</bean>
-	
+
+	<bean id="xsdContainer" class="com.mps.batmanii.ocrWebManager.beans.XsdContainer">
+	</bean>
+
 	<tx:annotation-driven />
 </beans>
