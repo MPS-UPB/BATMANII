@@ -1,6 +1,7 @@
 package com.mps.batmanii.ocrWebManager.beans;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +10,9 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.xml.sax.SAXException;
 
-import com.mps.batmanii.ocrWebManager.business.PropertyHolderFactory;
+import com.mps.batmanii.ocrWebManager.business.ParserXsd;
 
 /**
  * Clasa bean ce contine toate obiectele de tip XsdFile, corespunzatoare
@@ -40,7 +42,7 @@ public class XsdContainer {
 	// tipul
 	// XsdFile si le adauga pe toate acestea in lista xsdFiles
 	@PostConstruct
-	public void postConstruct() {
+	public void postConstruct() throws SAXException, IOException {
 		logger.info("In postconstruct");
 		logger.info("Directorul de input al schemelor: "
 				+ propertyHolder.getInputSchemasFolder());
@@ -49,6 +51,9 @@ public class XsdContainer {
 		File folder = new File(propertyHolder.getInputSchemasFolder());
 		for(File fileEntry : folder.listFiles()){
 			logger.info(fileEntry.getAbsolutePath());
+			ParserXsd parserXsd = new ParserXsd();
+			XsdFile xsdFile = parserXsd.parse(fileEntry.getAbsolutePath());
+			xsdFiles.add(xsdFile);
 		}
 	}
 
