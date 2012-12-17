@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 import com.mps.batmanii.ocrWebManager.beans.PropertyHolder;
 import com.mps.batmanii.ocrWebManager.controller.IndexController;
@@ -19,6 +20,7 @@ import com.mps.batmanii.ocrWebManager.controller.IndexController;
  * @author CosminV
  * 
  */
+@Service
 public class PropertyHolderFactory {
 
 	Logger logger = LoggerFactory.getLogger(IndexController.class);

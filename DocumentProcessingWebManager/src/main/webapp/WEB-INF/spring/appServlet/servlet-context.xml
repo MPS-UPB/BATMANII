@@ -23,7 +23,9 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
 	<context:component-scan base-package="com.mps.batmanii.ocrWebManager.controller" />
-	
+	<context:component-scan base-package="com.mps.batmanii.ocrWebManager.beans" />
+	<context:component-scan base-package="com.mps.batmanii.ocrWebManager.business" />
+
 </beans:beans>
