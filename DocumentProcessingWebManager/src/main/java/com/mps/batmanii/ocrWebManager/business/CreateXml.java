@@ -86,7 +86,6 @@ public class CreateXml {
 				father.appendChild(myElement.getElement());		
 			}
 
-
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory
 					.newInstance();
@@ -104,86 +103,8 @@ public class CreateXml {
 	}
 
 	public static void main(String argv[]) {
-		CreateXml createXml = new CreateXml();
-
-		XmlFile test = new XmlFile();
-		ExecParameter e1 = new ExecParameter();
-		ExecParameter e2 = new ExecParameter();
-		ExecParameter e3 = new ExecParameter();
-		ExecParameter e3_1 = new ExecParameter();
-		ExecParameter e3_2 = new ExecParameter();
-		ExecParameter e3_2_1 = new ExecParameter();
-		ExecParameter e3_3 = new ExecParameter();
-		ExecParameter sub_e3_3 = new ExecParameter();
-
-		Component c = new Component();
-		c.setName("task");
-
-		e1.setName("left");
-		e1.setValue("10");
-		e1.setMinOccurs(0);
-		e1.setMaxOccurs(0);
-		e1.setLevel(0);
-
-		e2.setName("bottom");
-		e2.setValue("10");
-		e2.setMinOccurs(0);
-		e2.setMaxOccurs(0);
-		e2.setLevel(0);
-
-		e3.setName("inputFile");
-		e3.setMinOccurs(0);
-		e3.setMaxOccurs(0);
-		e3.setLevel(0);
-		List<ExecParameter> exec = new ArrayList<ExecParameter>();
-		e3_1.setName("name");
-		e3_1.setValue("input.jpg");
-		e3_1.setMaxOccurs(0);
-		e3_1.setMinOccurs(0);
-		e3_1.setLevel(0);
-		exec.add(e3_1);
-
-		e3_2.setName("bottom");
-		e3_2.setValue("20");
-		e3_2.setMinOccurs(0);
-		e3_2.setMaxOccurs(0);
-		e3_2.setLevel(1);
-		List<ExecParameter> exec1 = new ArrayList<ExecParameter>();
-		e3_2_1.setName("name");
-		e3_2_1.setValue("input.jpg");
-		e3_2_1.setMaxOccurs(0);
-		e3_2_1.setMinOccurs(0);
-		e3_2_1.setLevel(1);
-		exec1.add(e3_2_1);
-		e3_2.setExecParameters(exec1);
-		exec.add(e3_2);
-
-		e3_3.setName("left");
-		e3_3.setValue("20");
-		e3_3.setMinOccurs(0);
-		e3_3.setMaxOccurs(0);
-		e3_3.setLevel(1);
-
-		sub_e3_3.setName("subcopil");
-		sub_e3_3.setValue("30");
-		sub_e3_3.setMinOccurs(0);
-		sub_e3_3.setMaxOccurs(0);
-		sub_e3_3.setLevel(2);
-		List<ExecParameter> exec_e3_3 = new ArrayList<ExecParameter>();
-		exec_e3_3.add(sub_e3_3);
-		e3_3.setExecParameters(exec_e3_3);
-
-		exec.add(e3_3);
-		e3.setExecParameters(exec);
-
-		List<ExecParameter> childrens = new ArrayList<ExecParameter>();
-
-		childrens.add(e1);
-		childrens.add(e2);
-		childrens.add(e3);
-
-		test.setChildrens(childrens);
-		test.setRootElement(c);
-		createXml.generateXml("D:\\file.xml", test);
+		/* rotate */
+		XmlElement task = new XmlElement();
+		task.setName("task");
 	}
 }
