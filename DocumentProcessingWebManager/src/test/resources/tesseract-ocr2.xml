@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<task xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="tesseract-ocr.xsd">
+  <inputFile name=""/>
+  <outputFile name=""/>
+  <TessPath name=""/>
+  <TessPath name=""/>
+  <processRectangle bottom="0" direction="ascending" left="0" right="0" top="0"/>
+</task>
