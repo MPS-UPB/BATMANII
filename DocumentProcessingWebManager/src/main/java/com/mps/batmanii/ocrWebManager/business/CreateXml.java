@@ -18,6 +18,8 @@ import org.w3c.dom.Element;
 
 import com.mps.batmanii.ocrWebManager.beans.Component;
 import com.mps.batmanii.ocrWebManager.beans.ExecParameter;
+import com.mps.batmanii.ocrWebManager.beans.MyElement;
+import com.mps.batmanii.ocrWebManager.beans.XmlElement;
 import com.mps.batmanii.ocrWebManager.beans.XmlFile;
 
 /**
@@ -28,50 +30,62 @@ import com.mps.batmanii.ocrWebManager.beans.XmlFile;
 
 public class CreateXml {
 
-	public void verifyChildren(Document doc, Element rootElem,
-			ExecParameter father) {
+	public int find_father(List<MyElement> elements_list, int level)
+	{
 		int index;
-		Element elem = doc.createElement(father.getName());
-		// Eg. <left> 10 </left>
-		if (father.getExecParameters() == null) {
-			Element element = doc.createElement(father.getName());
-			element.appendChild(doc.createTextNode(father.getValue()));
-			rootElem.appendChild(element);
-		} else {
-			for (index = 0; index < father.getExecParameters().size(); index++) {
-				ExecParameter children = father.getExecParameters().get(index);
-
-				// Eg. atribute <inputFile name='input.jpg' />
-				if (father.getLevel() == children.getLevel()) {
-					elem.setAttribute(children.getName(), children.getValue());
-				}
-				// subchildren
-				else {
-					verifyChildren(doc, elem, children);
-				}
-				rootElem.appendChild(elem);
-			}
+		for(index = 0; index < elements_list.size(); index++)
+		{
+			if(elements_list.get(index).getLevel() == level -1)
+				return index;
 		}
-
+		return -1;
+		
 	}
-
-	public void generateXml(String path, XmlFile xml) {
-		Component rootElement = xml.getRootElement();
-		List<ExecParameter> childrens = xml.getChildrens();
-		int i;
+	public void generateXml(String path, List<XmlElement> elements) {
+		int index, s = 0;
+		int size = elements.size();
+		List<MyElement> elements_list = new ArrayList<MyElement>();
+		
 		try {
-
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
-			// root element
 			Document doc = docBuilder.newDocument();
-			Element rootElem = doc.createElement(rootElement.getName());
-			doc.appendChild(rootElem);
+			
+			for(index = 0; index < size; index++)
+			{
+				XmlElement xmlElement = elements.get(index);
+				if(xmlElement.isAttribute() == false)
+				{
+					Element Elem = doc.createElement(xmlElement.getName());
+					MyElement newMyElement = new MyElement(Elem,xmlElement.getLevel());
+					elements_list.add(newMyElement);
+					s++;
+				}
+				else
+				{
+					/*add an atribute
+					 *  Eg. atribute <inputFile name='input.jpg' />
+					 */
+					MyElement aux = elements_list.get(s);
+					aux.getElement().setAttribute(xmlElement.getName(),xmlElement.getValue());
+					elements_list.set(s,aux);
+				}
+			}
+			
+			// root element
+			MyElement rootElem = elements_list.get(0);
+			doc.appendChild(rootElem.getElement());
+			size = elements_list.size();
+			for(index = 1; index < size; index++)
+			{
+				MyElement myElement = elements_list.get(index);
+				int father_index = find_father(elements_list,elements_list.get(index -1).getLevel());
+				Element father = elements_list.get(father_index).getElement(); 
+				father.appendChild(myElement.getElement());		
+			}
 
-			for (i = 0; i < childrens.size(); i++)
-				verifyChildren(doc, rootElem, childrens.get(i));
 
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory
