@@ -12,9 +12,45 @@ public class ExecParameter {
 	private String value;
 	private int minOccurs;
 	private int maxOccurs;
+	private boolean isAttribute =false ;
+
+
 	private int level;// rootElement are nivelul 0, iar apoi nivelul creste
 	private List<ExecParameter> execParameters;// copii sau null in caz ca nu
 												// mai are
+	private SimpleType simpleType;
+
+
+	public boolean isAttribute() {
+		return isAttribute;
+	}
+
+
+
+	public void setAttribute(boolean isAttribute) {
+		this.isAttribute = isAttribute;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "ExecParameter [name=" + name + ", value=" + value
+				+ ", minOccurs=" + minOccurs + ", maxOccurs=" + maxOccurs
+				+ ", isAttribute=" + isAttribute + ", level=" + level
+				+ ", execParameters=" + execParameters + ", simpleType="
+				+ simpleType + "]";
+	}
+
+
+	
+	public SimpleType getSimpleType() {
+		return simpleType;
+	}
+
+	public void setSimpleType(SimpleType simpleType) {
+		this.simpleType = simpleType;
+	}
 
 	public String getName() {
 		return name;

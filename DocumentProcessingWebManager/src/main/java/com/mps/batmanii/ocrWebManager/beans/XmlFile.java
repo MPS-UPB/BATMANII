@@ -12,6 +12,13 @@ public class XmlFile {
 	private String execType;
 	private String execName;
 	private Component rootElement;
+	@Override
+	public String toString() {
+		return "XmlFile [execType=" + execType + ", execName=" + execName
+				+ ", rootElement=" + rootElement + ", childrens=" + childrens
+				+ ", xmlElements=" + xmlElements + "]";
+	}
+
 	private List<ExecParameter> childrens;
 	private List<XmlElement> xmlElements;
 

@@ -10,6 +10,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import com.mps.batmanii.ocrWebManager.beans.AttributeType;
@@ -34,16 +36,20 @@ import com.sun.xml.xsom.parser.XSOMParser;
 import com.sun.xml.xsom.XSRestrictionSimpleType;
 
 public class ParserXsd {
+	private final static Logger logger = LoggerFactory
+			.getLogger(ParserXsd.class);
+
 	public static void main(String args[]) throws SAXException, IOException {
 		ParserXsd rr = new ParserXsd();
 		rr.parseSchema();
 	}
 
+	@SuppressWarnings("unchecked")
 	public XsdFile parse(String filename) throws SAXException, IOException {
 		XsdFile xsdFile = new XsdFile(filename);
-		ParserXsd rr = new ParserXsd();
-
+		logger.info("Filename " + filename);
 		File file = new File(filename);
+
 		LinkedList<ElementType> elementList = new LinkedList<ElementType>();
 		LinkedList<SimpleType> simpleList = new LinkedList<SimpleType>();
 		LinkedList<ComplexType> complexTypes = new LinkedList<ComplexType>();
@@ -58,9 +64,9 @@ public class ParserXsd {
 			XSComplexType ct = (XSComplexType) ctiter.next();
 			complexTypes.add(printElements(ct));
 		}
-		for (int i = 0; i < complexTypes.size(); i++)
+		//for (int i = 0; i < complexTypes.size(); i++)
 
-			System.out.println(complexTypes.get(i));
+			//System.out.println(complexTypes.get(i));
 
 		// Parse simpleType tag ;
 		Map<String, com.sun.xml.xsom.XSSimpleType> simpleTypes = gtypesSchema
@@ -73,7 +79,7 @@ public class ParserXsd {
 					.add(parseSimpleType(((Entry<String, com.sun.xml.xsom.XSSimpleType>) array[i])
 							.getValue()));
 		}
-		System.out.println(simpleList);
+		//System.out.println(simpleList);
 
 		gtypesSchema.getElementDecls();
 		Map<String, XSElementDecl> elementDecls = gtypesSchema
@@ -89,10 +95,10 @@ public class ParserXsd {
 			elementList
 					.add(new ElementType(printElements(xsComplexType), null,
 							new Component(aux.getKey(), aux.getValue()
-									.getType(), 0, 0)));
+									.getType(), 1, 1)));
 		}
-		for (int i = 0; i < elementList.size(); i++)
-			System.out.println(elementList);
+		//for (int i = 0; i < elementList.size(); i++)
+		//	System.out.println(elementList);
 		xsdFile.setComplexTypes(complexTypes);
 		xsdFile.setElementType(elementList.get(0));
 		xsdFile.setSimpleTypes(simpleList);
@@ -262,6 +268,7 @@ public class ParserXsd {
 		return complexTag;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void parseSchema() throws SAXException, IOException {
 		// File file = new File("D:\\tmp\\books.xsd");
 		File file = new File(
@@ -314,7 +321,7 @@ public class ParserXsd {
 			elementList
 					.add(new ElementType(printElements(xsComplexType), null,
 							new Component(aux.getKey(), aux.getValue()
-									.getType(), 0, 0)));
+									.getType(), 1, 1)));
 		}
 		for (int i = 0; i < elementList.size(); i++)
 

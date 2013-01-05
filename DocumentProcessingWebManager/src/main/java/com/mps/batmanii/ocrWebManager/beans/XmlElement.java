@@ -13,6 +13,27 @@ public class XmlElement {
 	private int level;
 	private SimpleType simpleType;
 
+	public XmlElement() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "XmlElement [name=" + name + ", value=" + value + ", attribute="
+				+ attribute + ", level=" + level + ", simpleType=" + simpleType
+				+ "]";
+	}
+
+	public XmlElement(String name, String value, boolean attribute, int level,
+			SimpleType simpleType) {
+		
+		this.name = name;
+		this.value = value;
+		this.attribute = attribute;
+		this.level = level;
+		this.simpleType = simpleType;
+	}
+
 	public String getName() {
 		return name;
 	}

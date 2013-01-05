@@ -7,6 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mps.batmanii.ocrWebManager.beans.AttributeType;
+import com.mps.batmanii.ocrWebManager.beans.ComplexType;
+import com.mps.batmanii.ocrWebManager.beans.ElementType;
+import com.mps.batmanii.ocrWebManager.beans.ExecParameter;
+import com.mps.batmanii.ocrWebManager.beans.SimpleType;
 import com.mps.batmanii.ocrWebManager.beans.XmlElement;
 import com.mps.batmanii.ocrWebManager.beans.XmlElementForm;
 import com.mps.batmanii.ocrWebManager.beans.XmlFile;
@@ -26,10 +31,100 @@ public class XsdToXml {
 	@Autowired
 	XsdContainer xsdContainer;
 
+	ArrayList<ExecParameter> parseComplexType(ComplexType complexType,
+			int level, XsdFile xsdFile) {
+
+		ArrayList<ExecParameter> execParameters = new ArrayList<ExecParameter>();
+		for (AttributeType attributeType : complexType.getAttribute()) {
+			ExecParameter execParameter = new ExecParameter();
+			execParameter.setLevel(level);
+			execParameter.setMaxOccurs(1);
+			execParameter.setMinOccurs(1);
+			execParameter.setName(attributeType.getName());
+			execParameter.setSimpleType(null);
+			execParameter.setAttribute(true);
+			// logger.info (attributeType.getType().getName());
+			// logger.info (xsdFile.getSimpleTypes().toString());
+			for (SimpleType simpleType : xsdFile.getSimpleTypes()) {
+
+				if (simpleType.getName().compareTo(
+						attributeType.getType().getName()) == 0) {
+					execParameter.setSimpleType(simpleType);
+					break;
+				}
+			}
+			execParameters.add(execParameter);
+
+		}
+		for (ElementType elementType : complexType.getElem()) {
+
+			if (elementType.getElem().getName().compareTo("execInfo") != 0) {
+				ExecParameter execParameter = new ExecParameter();
+				execParameter.setLevel(level);
+				execParameter
+						.setMaxOccurs(elementType.getElem().getMaxOccurs());
+				execParameter
+						.setMinOccurs(elementType.getElem().getMinOccurs());
+				execParameter.setName(elementType.getElem().getName());
+				execParameter.setSimpleType(null);
+				if (elementType.getElem().getType().getName() != null)
+					for (SimpleType simpleType : xsdFile.getSimpleTypes()) {
+						if (simpleType.getName().compareTo(
+								elementType.getElem().getType().getName()) == 0)
+							execParameter.setSimpleType(simpleType);
+					}
+				if (elementType.getElem().getType().getName() != null)
+					for (ComplexType complexType2 : xsdFile.getComplexTypes()) {
+						if (complexType2
+								.getComp()
+								.getName()
+								.compareTo(
+										elementType.getElem().getType()
+												.getName()) == 0) {
+							execParameter.setExecParameters(parseComplexType(
+									complexType2, level + 1, xsdFile));
+							break;
+						}
+					}
+				execParameters.add(execParameter);
+			}
+		}
+		return execParameters;
+
+	}
+
 	// ToDo pt Bersy
 	// Primeste ca parametru un obiect XsdFile si imi intoarce un obiect XmlFile
 	public XmlFile getXmlFileFromXsdFile(XsdFile xsdFile) {
-		return null;
+		XmlFile xmlFile = new XmlFile();
+		ArrayList<SimpleType> listSimpleType = new ArrayList<SimpleType>(
+				xsdFile.getSimpleTypes());
+		// LinkedList<SimpleType>listSimpleType = (LinkedList<SimpleType>)
+		// xsdFile.getSimpleTypes();
+		for (int i = 0; i < listSimpleType.size(); i++) {
+			if (listSimpleType.get(i).getName().compareTo("execName") == 0) {
+				xmlFile.setExecName(listSimpleType.get(i).getPattern());
+			}
+			if (listSimpleType.get(i).getName().compareTo("execType") == 0) {
+				xmlFile.setExecType(listSimpleType.get(i).getPattern());
+			}
+
+		}
+		xmlFile.setRootElement(xsdFile.getElementType().getElem());
+		if (xsdFile.getElementType().getComplexType() != null) {
+			ComplexType complexType = xsdFile.getElementType().getComplexType();
+			xmlFile.setChildrens(parseComplexType(complexType, 1, xsdFile));
+		} else
+			for (ComplexType complexType : xsdFile.getComplexTypes()) {
+				if (xsdFile.getElementType().getElem().getType() != null)
+					if (xsdFile.getElementType().getElem().getType().getName()
+							.compareTo(complexType.getComp().getName()) == 0) {
+						xmlFile.setChildrens(parseComplexType(complexType, 1,
+								xsdFile));
+					}
+			}
+
+		return xmlFile;
 	}
 
 	/**
@@ -38,13 +133,46 @@ public class XsdToXml {
 	 */
 	// ToDo Bersy
 	public XsdFile getXsdFileByExecName(String execName) {
-
+		ArrayList<XsdFile> listXsdFiles = new ArrayList<XsdFile>(
+				xsdContainer.getXsdFiles());
+		for (int i = 0; i < listXsdFiles.size(); i++) {
+			ArrayList<SimpleType> listSimpleType = (ArrayList<SimpleType>) listXsdFiles
+					.get(i).getSimpleTypes();
+			for (int j = 0; j < listSimpleType.size(); j++) {
+				if (listSimpleType.get(j).getName().compareTo("execName") == 0
+						&& listSimpleType.get(j).getPattern()
+								.compareTo(execName) == 0)
+					return listXsdFiles.get(i);
+			}
+		}
 		return null;
+	}
+
+	public ArrayList<XmlElement> parseExecParameter(ExecParameter execParameter) {
+		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();
+		xmlElements.add(new XmlElement(execParameter.getName(), null,
+				execParameter.isAttribute(),
+				execParameter.getLevel(), execParameter
+						.getSimpleType()));
+		if (execParameter.getExecParameters() != null)
+			for (ExecParameter execParameter1 : execParameter
+					.getExecParameters()) {
+				xmlElements.addAll(parseExecParameter(execParameter1));
+			}
+		return xmlElements;
+
 	}
 
 	// ToDo Bersy
 	public List<XmlElement> getXmlElements(XmlFile xmlFile) {
-		return null;
+
+		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();
+		xmlElements.add(new XmlElement(xmlFile.getRootElement().getName(),
+				null, false, 0, null));
+		for (ExecParameter execParameter : xmlFile.getChildrens()) {
+			xmlElements.addAll(parseExecParameter(execParameter));
+		}
+		return xmlElements;
 	}
 
 	/**
