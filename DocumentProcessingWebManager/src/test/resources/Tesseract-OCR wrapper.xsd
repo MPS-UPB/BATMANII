@@ -30,7 +30,7 @@
  </xs:simpleType>
  
  <xs:complexType name="restrictedRectangleType">
-   <xs:attribute name="direction" type="DirType" use="required"/>
+   <xs:attribute name="direction" type="fileType" use="required"/>
    <xs:attribute name="top" type="xs:integer" use="required"/>
    <xs:attribute name="bottom" type="xs:integer" use="required"/>
    <xs:attribute name="left" type="xs:integer" use="required"/>
