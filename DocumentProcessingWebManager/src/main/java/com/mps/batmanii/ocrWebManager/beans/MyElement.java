@@ -2,6 +2,12 @@ package com.mps.batmanii.ocrWebManager.beans;
 
 import org.w3c.dom.Element;
 
+/**
+ * 
+ * @author Adela
+ * 
+ */
+
 public class MyElement {
 	private Element element;
 	private int level;
