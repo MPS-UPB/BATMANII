@@ -31,7 +31,17 @@
 		<property name="uploadedImagesFolder" value="${config.uploadedImagesFolder}" />
 	</bean>
 
+	<!-- singletons in application -->
 	<bean id="xsdContainer" class="com.mps.batmanii.ocrWebManager.beans.XsdContainer">
+	</bean>
+
+	<bean id="execContainer" class="com.mps.batmanii.ocrWebManager.beans.ExecContainer">
+	</bean>
+
+	<bean id="selectedExecs" class="com.mps.batmanii.ocrWebManager.beans.SelectedExecs">
+	</bean>
+
+	<bean id="selectedXmlFiles" class="com.mps.batmanii.ocrWebManager.beans.SelectedXmlFiles">
 	</bean>
 
 	<tx:annotation-driven />

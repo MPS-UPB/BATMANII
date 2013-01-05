@@ -4,37 +4,12 @@
 	function isChecked(checkboxId, execsId) {
 		if (document.getElementById(checkboxId).checked == true) {
 			document.getElementById(execsId).style.display = 'block';
-			//document.getElementById('parameterseffect').style.display = 'block';
 		} else {
 			document.getElementById(execsId).style.display = 'none';
 		}
 	}
 </script>
-<script>
-$(function() {
-    // run the currently selected effect
-    function runEffect() {
-        var options = {};
-        // run the effect
-        $( "#effect" ).show( "blind", options, 500, callback );
-    };
 
-    //callback function to bring a hidden box back
-    function callback() {
-    };
-
-    // set effect from select menu value
-    $( "#preprocessing" ).click(function() {
-        runEffect();
-        return true;
-    });
-
-   // $( "#effectpreprocessing" ).hide();
-    //$( "#effectpreprocessing" ).show("bounce");
-    
-});
-
-</script>
 </head>
 <body id="page2">
 	<!--==============================header=================================-->
@@ -76,7 +51,6 @@ $(function() {
 										onclick="isChecked('preprocessing', 'effectpreprocessing')">Preprocesssing<br>
 									<input type="checkbox" value="Binarization" id="binarization"
 										onclick="isChecked('binarization', 'effectbinarization')">Binarization<br>
-
 									<input type="checkbox" value="layout" id="layout"
 										onclick="isChecked('layout', 'effectlayout')">Layout<br>
 									<input type="checkbox" value="Paging" id="paging"
@@ -91,108 +65,111 @@ $(function() {
 							</div>
 						</td>
 						<td>
-							<div id="big">
-								<ul style="display: none;" id="effectpreprocessing"
+							<div id="effect">
+								<ul  id="effectpreprocessing"
 									class="ui-widget-content ui-corner-all">
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											preprocessing</h3></li>
-									<li><input type="checkbox">preprocessing<br></li>
+									<c:forEach var="exec" items="${execs}">
+										<c:if test="${exec.execType==\"preprocessing\"}">
+											<li><a
+												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
+													type="button" value="${exec.execName}"></a><br></li>
+										</c:if>
+									</c:forEach>
+
 								</ul>
 
-								<ul style="display: none;" id="effectbinarization"
+								<ul  id="effectbinarization"
 									class="ui-widget-content ui-corner-all">
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											binarization</h3></li>
-									<li><input type="checkbox">binarization<br></li>
+									<c:forEach var="exec" items="${execs}">
+										<c:if test="${exec.execType==\"binarization\"}">
+											<li><a
+												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
+													type="button" value="${exec.execName}"></a><br></li>
+										</c:if>
+									</c:forEach>
 								</ul>
 
 
-								<ul style="display: none;" id="effectlayout"
+								<ul  id="effectlayout"
 									class="ui-widget-content ui-corner-all">
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											layout</h3></li>
-									<li><input type="checkbox">layout<br></li>
+									<c:forEach var="exec" items="${execs}">
+										<c:if test="${exec.execType==\"layout\"}">
+											<li><a
+												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
+													type="button" value="${exec.execName}"></a><br></li>
+										</c:if>
+									</c:forEach>
 								</ul>
 
-								<ul style="display: none;" id="effectpaging"
+								<ul  id="effectpaging"
 									class="ui-widget-content ui-corner-all">
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											paging</h3></li>
-									<li><input type="checkbox">paging<br></li>
+									<c:forEach var="exec" items="${execs}">
+										<c:if test="${exec.execType==\"paging\"}">
+											<li><a
+												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
+													type="button" value="${exec.execName}"></a><br></li>
+										</c:if>
+									</c:forEach>
 								</ul>
 
-								<ul style="display: none;" id="effectocr"
+								<ul  id="effectocr"
 									class="ui-widget-content ui-corner-all">
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											ocr</h3></li>
-									<li><input type="checkbox">ocr<br></li>
+									<c:forEach var="exec" items="${execs}">
+										<c:if test="${exec.execType==\"ocr\"}">
+											<li><a
+												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
+													type="button" value="${exec.execName}"></a><br></li>
+										</c:if>
+									</c:forEach>
 								</ul>
 
-								<ul style="display: none;" id="effecthierarchy"
+								<ul id="effecthierarchy"
 									class="ui-widget-content ui-corner-all">
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											hierarchy</h3></li>
-									<li><input type="checkbox">hierarchy<br></li>
+									<c:forEach var="exec" items="${execs}">
+										<c:if test="${exec.execType==\"hierarchy\"}">
+											<li><a
+												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
+													type="button" value="${exec.execName}"></a><br></li>
+										</c:if>
+									</c:forEach>
 								</ul>
 
-								<ul style="display: none;" id="effectpdf"
+								<ul id="effectpdf"
 									class="ui-widget-content ui-corner-all">
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											pdf-exporter</h3></li>
-									<li><input type="checkbox">pdf<br></li>
+									<c:forEach var="exec" items="${execs}">
+										<c:if test="${exec.execType==\"pdf\"}">
+											<li><a
+												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
+													type="button" value="${exec.execName}"></a><br></li>
+										</c:if>
+									</c:forEach>
 								</ul>
-								<!-- 
-								<div class="toggler">
-									<div id="effectp" class="ui-widget-content ui-corner-all">
-										<h3 class="ui-widget-header ui-corner-all">Executables</h3>
-										<c:forEach var="exec" items="${list}">
-											<input type="checkbox">${exec}<br>
-										</c:forEach>
-									</div>
-								</div> -->
-								<!-- <div class="toggler">
-									<div id="effect" class="ui-widget-content ui-corner-all">
-										<h3 class="ui-widget-header ui-corner-all">Binarization</h3>
-										<p>Aici vor fi listate executabilele de tipul binarization</p>
-									</div>
-								</div>
-								<div class="toggler">
-									<div id="effect" class="ui-widget-content ui-corner-all">
-										<h3 class="ui-widget-header ui-corner-all">Layout</h3>
-										<p>Aici vor fi listate executabilele de tipul layout</p>
-									</div>
-								</div>
-								<div class="toggler">
-									<div id="effect" class="ui-widget-content ui-corner-all">
-										<h3 class="ui-widget-header ui-corner-all">Paging</h3>
-										<p>Aici vor fi listate executabilele de tipul paging</p>
-									</div>
-								</div>
-								<div class="toggler">
-									<div id="effect" class="ui-widget-content ui-corner-all">
-										<h3 class="ui-widget-header ui-corner-all">OCR</h3>
-										<p>Aici vor fi listate executabilele de tipul ocr</p>
-									</div>
-								</div>
-								<div class="toggler">
-									<div id="effect" class="ui-widget-content ui-corner-all">
-										<h3 class="ui-widget-header ui-corner-all">Hierarchy</h3>
-										<p>Aici vor fi listate executabilele de tipul hierarchy</p>
-									</div>
-								</div>
-								<div class="toggler">
-									<div id="effect" class="ui-widget-content ui-corner-all">
-										<h3 class="ui-widget-header ui-corner-all">PDF-exporter</h3>
-										<p>Aici vor fi listate executabilele de tipul pdf-exporter</p>
-									</div>
-								</div>-->
+
 							</div>
 						</td>
 						<td>
 							<div class="parameter">
-								<div id="parameterseffect" style="display: none;"
+								<div id="parameterseffect" style="display: block;"
 									class="ui-widget-content ui-corner-all">
-									<h3 class="ui-widget-header ui-corner-all">Parameters</h3>
+									<h3 class="ui-widget-header ui-corner-all">Selected
+										executables</h3>
+									<c:forEach var="selexec" items="${selectedExecs}">
+										<p>${selexec.execName} ${selexec.execType}</p>
+									</c:forEach>
 								</div>
 							</div>
 						</td>
@@ -200,7 +177,6 @@ $(function() {
 				</table>
 			</div>
 		</div>
-		</div>
 	</section>
-	<input id="selected" hidden="true" value="">
+	<input id="selectedExecs" hidden="true" value="${execs}">
 	<%@ include file="/WEB-INF/views/footer.jsp"%>

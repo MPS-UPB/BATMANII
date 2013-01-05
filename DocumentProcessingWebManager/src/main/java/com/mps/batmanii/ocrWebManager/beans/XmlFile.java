@@ -13,6 +13,7 @@ public class XmlFile {
 	private String execName;
 	private Component rootElement;
 	private List<ExecParameter> childrens;
+	private List<XmlElement> xmlElements;
 
 	public XmlFile() {
 		super();
@@ -48,6 +49,14 @@ public class XmlFile {
 
 	public void setChildrens(List<ExecParameter> childrens) {
 		this.childrens = childrens;
+	}
+
+	public List<XmlElement> getXmlElements() {
+		return xmlElements;
+	}
+
+	public void setXmlElements(List<XmlElement> xmlElements) {
+		this.xmlElements = xmlElements;
 	}
 
 }

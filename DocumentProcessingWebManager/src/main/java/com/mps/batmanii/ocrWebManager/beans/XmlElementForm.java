@@ -1,17 +1,12 @@
 package com.mps.batmanii.ocrWebManager.beans;
 
-/**
- * 
- * @author Adela
- * 
- */
-
-public class XmlElement {
+public class XmlElementForm {
 	private String name;
 	private String value;
 	private boolean attribute;
 	private int level;
 	private SimpleType simpleType;
+	private boolean toDisplay;
 
 	public String getName() {
 		return name;
@@ -52,5 +47,14 @@ public class XmlElement {
 	public void setSimpleType(SimpleType simpleType) {
 		this.simpleType = simpleType;
 	}
+
+	public boolean getToDisplay() {
+		return toDisplay;
+	}
+
+	public void setToDisplay(boolean toDisplay) {
+		this.toDisplay = toDisplay;
+	}
+
 
 }

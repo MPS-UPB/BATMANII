@@ -36,21 +36,20 @@ public class XsdContainer {
 		xsdFiles = new ArrayList<XsdFile>();
 	}
 
-	// Metoda apelata dupa construirea obiectului citeste fisierele .xsd din
-	// directorul de scheme, realizeaza
-	// parsarea pentru fiecare dintre acestea, creand cate un nou obiect de
-	// tipul
-	// XsdFile si le adauga pe toate acestea in lista xsdFiles
+	/**
+	 * Metoda apelata dupa construirea obiectului; citeste fisierele .xsd din
+	 * directorul de scheme, realizeaza parsarea pentru fiecare dintre acestea,
+	 * creand cate un nou obiect de tipul XsdFile si le adauga pe toate acestea
+	 * in lista xsdFiles
+	 * 
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	@PostConstruct
 	public void postConstruct() throws SAXException, IOException {
-		logger.info("In postconstruct");
-		logger.info("Directorul de input al schemelor: "
-				+ propertyHolder.getInputSchemasFolder());
-		// ToDo - citire fisiere din director si parsare
-		
+		logger.info("In postconstruct XsdContainer");
 		File folder = new File(propertyHolder.getInputSchemasFolder());
-		for(File fileEntry : folder.listFiles()){
-			logger.info(fileEntry.getAbsolutePath());
+		for (File fileEntry : folder.listFiles()) {
 			ParserXsd parserXsd = new ParserXsd();
 			XsdFile xsdFile = parserXsd.parse(fileEntry.getAbsolutePath());
 			xsdFiles.add(xsdFile);

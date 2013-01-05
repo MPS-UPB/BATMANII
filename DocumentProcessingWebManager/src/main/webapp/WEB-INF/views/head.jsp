@@ -59,7 +59,7 @@
 }
 
 #effect {
-	width: 240px;
+	width: 300px;
 	padding: 0.4em;
 	position: relative;
 }

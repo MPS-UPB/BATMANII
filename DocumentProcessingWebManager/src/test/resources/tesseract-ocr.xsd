@@ -52,7 +52,7 @@
        
        <xs:element name="inputFile" type="fileType"/>
        <xs:element name="outputFile" type="fileType"/>
-       <xs:element name="TessPath" type="fileType" minOccurs="2" maxOccurs="2"/>
+       <xs:element name="TessPath" type="fileType" minOccurs="1" maxOccurs="1"/>
        <xs:element name="processRectangle" type="restrictedRectangleType" minOccurs="1" maxOccurs="1"/>
      </xs:sequence>
    </xs:complexType>

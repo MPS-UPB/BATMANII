@@ -3,7 +3,7 @@ package com.mps.batmanii.ocrWebManager.beans;
 import java.util.List;
 
 /**
- * Clasa bean in care sunt retinute informatiile dintr-un fisier .xsd
+ * Clasa bean in care sunt retinute informatiile dintr-un fisier .xsd parsat
  * 
  * @author comy
  * 
