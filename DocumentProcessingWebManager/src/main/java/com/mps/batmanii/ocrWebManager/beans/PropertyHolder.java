@@ -13,6 +13,7 @@ public class PropertyHolder {
 	private String outputSchemasFolder;
 	private String execsFolder;
 	private String uploadedImagesFolder;
+	private String results;
 
 	/**
 	 * Zero constructor
@@ -55,6 +56,14 @@ public class PropertyHolder {
 
 	public void setUploadedImagesFolder(String uploadedImagesFolder) {
 		this.uploadedImagesFolder = uploadedImagesFolder;
+	}
+
+	public String getResults() {
+		return results;
+	}
+
+	public void setResults(String results) {
+		this.results = results;
 	}
 
 }

@@ -17,6 +17,7 @@ public class ResultController {
 
 	@RequestMapping("")
 	public String display(Model model) {
+		
 		return "result";
 	}
 }

@@ -29,6 +29,7 @@
 		<property name="outputSchemasFolder" value="${config.outputSchemasFolder}" />
 		<property name="execsFolder" value="${config.execsFolder}" />
 		<property name="uploadedImagesFolder" value="${config.uploadedImagesFolder}" />
+		<property name="results" value="${config.results}" />
 	</bean>
 
 	<!-- singletons in application -->
