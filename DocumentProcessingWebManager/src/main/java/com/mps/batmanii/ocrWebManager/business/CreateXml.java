@@ -30,7 +30,7 @@ public class CreateXml {
 	public int find_father(List<MyElement> elements_list, int level)
 	{
 		int index;
-		for(index = 0; index < elements_list.size(); index++)
+		for(index = elements_list.size() -1 ; index >=0; index--)
 		{
 			if(elements_list.get(index).getLevel() == level -1)
 				return index;
@@ -132,7 +132,7 @@ public class CreateXml {
 		XmlElement name_in = new XmlElement();
 		name_in.setName("name");
 		name_in.setValue("input.jpg");
-		name_in.setLevel(1);
+		name_in.setLevel(2);
 		name_in.setAttribute(true);
 		rotate.add(name_in);
 		
@@ -145,7 +145,7 @@ public class CreateXml {
 		XmlElement name_out = new XmlElement();
 		name_out.setName("name");
 		name_out.setValue("output.jpg");
-		name_out.setLevel(1);
+		name_out.setLevel(2);
 		name_out.setAttribute(true);
 		rotate.add(name_out);
 		
@@ -175,7 +175,7 @@ public class CreateXml {
 		XmlElement name_in_otsu = new XmlElement();
 		name_in_otsu.setName("name");
 		name_in_otsu.setValue("input_otsu.jpg");
-		name_in_otsu.setLevel(1);
+		name_in_otsu.setLevel(2);
 		name_in_otsu.setAttribute(true);
 		otsu.add(name_in_otsu);
 		
@@ -188,7 +188,7 @@ public class CreateXml {
 		XmlElement name_out_otsu = new XmlElement();
 		name_out_otsu.setName("name");
 		name_out_otsu.setValue("output_otsu.jpg");
-		name_out_otsu.setLevel(1);
+		name_out_otsu.setLevel(2);
 		name_out_otsu.setAttribute(true);
 		otsu.add(name_out_otsu);
 		
@@ -211,7 +211,7 @@ public class CreateXml {
 		XmlElement name_in_crop = new XmlElement();
 		name_in_crop.setName("name");
 		name_in_crop.setValue("input_crop.jpg");
-		name_in_crop.setLevel(1);
+		name_in_crop.setLevel(2);
 		name_in_crop.setAttribute(true);
 		crop.add(name_in_crop);
 		
@@ -224,7 +224,7 @@ public class CreateXml {
 		XmlElement name_out_crop = new XmlElement();
 		name_out_crop.setName("name");
 		name_out_crop.setValue("output_crop.jpg");
-		name_out_crop.setLevel(1);
+		name_out_crop.setLevel(2);
 		name_out_crop.setAttribute(true);
 		crop.add(name_out_crop);
 		
@@ -275,7 +275,7 @@ public class CreateXml {
 		XmlElement name_in_deskew = new XmlElement();
 		name_in_deskew.setName("name");
 		name_in_deskew.setValue("input_deskew.jpg");
-		name_in_deskew.setLevel(1);
+		name_in_deskew.setLevel(2);
 		name_in_deskew.setAttribute(true);
 		deskew.add(name_in_deskew);
 		
@@ -288,7 +288,7 @@ public class CreateXml {
 		XmlElement name_out_deskew = new XmlElement();
 		name_out_deskew.setName("name");
 		name_out_deskew.setValue("output_deskew.jpg");
-		name_out_deskew.setLevel(1);
+		name_out_deskew.setLevel(2);
 		name_out_deskew.setAttribute(true);
 		deskew.add(name_out_deskew);
 		
@@ -311,7 +311,7 @@ public class CreateXml {
 		XmlElement name_in_tesseract = new XmlElement();
 		name_in_tesseract.setName("name");
 		name_in_tesseract.setValue("input_tesseract.jpg");
-		name_in_tesseract.setLevel(1);
+		name_in_tesseract.setLevel(2);
 		name_in_tesseract.setAttribute(true);
 		tesseract.add(name_in_tesseract);
 		
@@ -324,7 +324,7 @@ public class CreateXml {
 		XmlElement name_out_tesseract = new XmlElement();
 		name_out_tesseract.setName("name");
 		name_out_tesseract.setValue("output_tesseract.jpg");
-		name_out_tesseract.setLevel(1);
+		name_out_tesseract.setLevel(2);
 		name_out_tesseract.setAttribute(true);
 		tesseract.add(name_out_tesseract);
 		
