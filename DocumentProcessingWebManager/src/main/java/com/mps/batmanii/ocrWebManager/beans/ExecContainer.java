@@ -35,6 +35,7 @@ public class ExecContainer {
 		for (File fileEntry : folder.listFiles()) {
 			Exec exec = new Exec(fileEntry.getName());
 			exec.setExecType(getExecTypeByExecName(fileEntry.getName()));
+			logger.info(exec.getExecName() + " " + exec.getExecType());
 			execs.add(exec);
 		}
 	}
@@ -47,7 +48,6 @@ public class ExecContainer {
 		this.execs = execs;
 	}
 
-	// ToDo Bersy - momentan metoda e hardcodata de comy
 	/**
 	 * Metoda care cauta in containerul de fisiere .xsd parsate dupa numele
 	 * executabilului si intoarce tipul executabilului sub forma de string
@@ -56,15 +56,26 @@ public class ExecContainer {
 	 * @return
 	 */
 	public String getExecTypeByExecName(String execName) {
-		if (execName.contains("crop"))
-			return "preprocessing";
-		if (execName.contains("hierarchy"))
-			return "hierarchy";
-		if (execName.contains("layout"))
-			return "layout";
-		if (execName.contains("tesseract"))
-			return "ocr";
-		return "default";
+		ArrayList<XsdFile> listXsdFiles = new ArrayList<XsdFile>(
+				xsdContainer.getXsdFiles());
+		for (int i = 0; i < listXsdFiles.size(); i++) {
+			ArrayList<SimpleType> listSimpleType = new ArrayList<SimpleType>(
+					listXsdFiles.get(i).getSimpleTypes());
+			for (int j = 0; j < listSimpleType.size(); j++) {
+				if (listSimpleType.get(j).getName().compareTo("execName") == 0
+						&& listSimpleType.get(j).getPattern()
+								.compareTo(execName) == 0) {
+					for (int k = 0; k < listSimpleType.size(); k++) {
+						if (listSimpleType.get(k).getName()
+								.compareTo("execType") == 0){
+							return listSimpleType.get(k).getPattern();
+						}
+					}
+				}
+
+			}
+		}
+		return "unknown";
 	}
 
 }

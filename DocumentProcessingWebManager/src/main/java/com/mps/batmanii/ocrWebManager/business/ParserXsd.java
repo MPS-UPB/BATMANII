@@ -47,7 +47,7 @@ public class ParserXsd {
 	@SuppressWarnings("unchecked")
 	public XsdFile parse(String filename) throws SAXException, IOException {
 		XsdFile xsdFile = new XsdFile(filename);
-		logger.info("Filename " + filename);
+		//logger.info("Filename " + filename);
 		File file = new File(filename);
 
 		LinkedList<ElementType> elementList = new LinkedList<ElementType>();

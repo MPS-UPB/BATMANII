@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.xml.sax.SAXException;
 
 import com.mps.batmanii.ocrWebManager.business.ParserXsd;
-import com.mps.batmanii.ocrWebManager.business.XsdToXml;
 
 /**
  * Clasa bean ce contine toate obiectele de tip XsdFile, corespunzatoare
@@ -51,18 +50,10 @@ public class XsdContainer {
 		logger.info("In postconstruct XsdContainer");
 		File folder = new File(propertyHolder.getInputSchemasFolder());
 		for (File fileEntry : folder.listFiles()) {
+			logger.info(fileEntry.getAbsolutePath());
 			ParserXsd parserXsd = new ParserXsd();
 			XsdFile xsdFile = parserXsd.parse(fileEntry.getAbsolutePath());
 			xsdFiles.add(xsdFile);
-		}
-		// testare
-		XsdToXml xsdToXml = new XsdToXml();
-		XmlFile xmlFile = xsdToXml.getXmlFileFromXsdFile(xsdFiles.get(0));
-		logger.info(xmlFile.toString());
-		List<XmlElement> xmlElements = xsdToXml.getXmlElements(xmlFile);
-		logger.info("mata");
-		for (XmlElement element : xmlElements) {
-			logger.info(element.toString());
 		}
 	}
 

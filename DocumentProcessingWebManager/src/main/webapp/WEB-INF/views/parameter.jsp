@@ -36,7 +36,8 @@
 							<tr>
 								<c:if test="${xmlElement.toDisplay == true}">
 									<td colspan="${xmlElement.level }" align="center">${xmlElement.name}</td>
-									<td><form:input type="text" path="xmlElements[${s.index}].value" /></td>
+									<td><form:input type="text"
+											path="xmlElements[${s.index}].value" /></td>
 								</c:if>
 								<c:if test="${xmlElement.toDisplay == false}">
 									<td colspan="${xmlElement.level }" align="center">${xmlElement.name}</td>
@@ -47,8 +48,16 @@
 							<tr>
 						</c:forEach>
 					</table>
-					<input type="submit" value="Submit" />
+					<table>
+						<tr>
+							<td><input type="submit" value="Submit" /><td>
+							
 				</form:form>
+				<td><a href="/ocrwebmanager/ocr/cancel?execName=${exec.execName}"> <input type="button"
+								value="Back" /></a></td>
+				</tr>
+				</table>
+
 			</div>
 		</div>
 	</section>

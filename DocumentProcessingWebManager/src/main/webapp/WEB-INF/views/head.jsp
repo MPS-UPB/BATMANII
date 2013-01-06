@@ -27,14 +27,12 @@
 }			
 .types {
 	width: 300px;
-	height: 240px;
 	position: relative;
 	float: left;
 }
 
 #typeseffect {
 	width: 240px;
-	height: 240px;
 	padding: 0.4em;
 	position: relative;
 }
@@ -108,14 +106,13 @@ h3 {
 
 
 .parameters {
-	width: 300px;
+	width: 400px;
 	position: relative;
 	float: left;
 }
 
 #parameterseffect {
-	width: 240px;
-	height: 240px;
+	width: 380px;
 	padding: 0.4em;
 	position: relative;
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ResultController {
 
 	@RequestMapping("")
-	public String displayOCRPage(Model model) {
+	public String display(Model model) {
 		return "result";
 	}
 }

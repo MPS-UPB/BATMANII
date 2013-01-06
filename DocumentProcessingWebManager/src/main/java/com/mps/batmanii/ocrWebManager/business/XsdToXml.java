@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.mps.batmanii.ocrWebManager.beans.AttributeType;
 import com.mps.batmanii.ocrWebManager.beans.ComplexType;
 import com.mps.batmanii.ocrWebManager.beans.ElementType;
@@ -28,8 +26,15 @@ public class XsdToXml {
 	private final static Logger logger = LoggerFactory
 			.getLogger(XsdToXml.class);
 
-	@Autowired
 	XsdContainer xsdContainer;
+
+	public XsdContainer getXsdContainer() {
+		return xsdContainer;
+	}
+
+	public void setXsdContainer(XsdContainer xsdContainer) {
+		this.xsdContainer = xsdContainer;
+	}
 
 	ArrayList<ExecParameter> parseComplexType(ComplexType complexType,
 			int level, XsdFile xsdFile) {
@@ -136,8 +141,8 @@ public class XsdToXml {
 		ArrayList<XsdFile> listXsdFiles = new ArrayList<XsdFile>(
 				xsdContainer.getXsdFiles());
 		for (int i = 0; i < listXsdFiles.size(); i++) {
-			ArrayList<SimpleType> listSimpleType = (ArrayList<SimpleType>) listXsdFiles
-					.get(i).getSimpleTypes();
+			ArrayList<SimpleType> listSimpleType = new ArrayList<SimpleType>(
+					listXsdFiles.get(i).getSimpleTypes());
 			for (int j = 0; j < listSimpleType.size(); j++) {
 				if (listSimpleType.get(j).getName().compareTo("execName") == 0
 						&& listSimpleType.get(j).getPattern()
@@ -151,9 +156,8 @@ public class XsdToXml {
 	public ArrayList<XmlElement> parseExecParameter(ExecParameter execParameter) {
 		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();
 		xmlElements.add(new XmlElement(execParameter.getName(), null,
-				execParameter.isAttribute(),
-				execParameter.getLevel(), execParameter
-						.getSimpleType()));
+				execParameter.isAttribute(), execParameter.getLevel(),
+				execParameter.getSimpleType()));
 		if (execParameter.getExecParameters() != null)
 			for (ExecParameter execParameter1 : execParameter
 					.getExecParameters()) {
@@ -190,7 +194,7 @@ public class XsdToXml {
 			if (xmlElements.get(i).getAttribute() == true) {
 				xmlElementForm.setToDisplay(true);
 			} else {
-				if ((i + 1) < (xmlElements.size() - 1)) {
+				if (i < (xmlElements.size() - 1)) {
 					if (xmlElements.get(i + 1).getLevel() > xmlElements.get(i)
 							.getLevel()) {
 						xmlElementForm.setToDisplay(false);
@@ -213,6 +217,7 @@ public class XsdToXml {
 		xmlElementForm.setLevel(element.getLevel());
 		xmlElementForm.setAttribute(element.getAttribute());
 		xmlElementForm.setSimpleType(element.getSimpleType());
+		xmlElementForm.setValue(element.getValue());
 		return xmlElementForm;
 	}
 
@@ -222,7 +227,7 @@ public class XsdToXml {
 	public List<XmlElement> createXmlElements(List<XmlElementForm> forms) {
 		List<XmlElement> xmlElements = new ArrayList<XmlElement>();
 		for (int i = 0; i < forms.size(); i++) {
-			logger.info(i + "");
+			// logger.info(i + "");
 			xmlElements.add(createElementFromForm(forms.get(i)));
 		}
 		return xmlElements;
@@ -237,5 +242,14 @@ public class XsdToXml {
 		element.setValue(form.getValue());
 		logger.info(element.getName() + " " + element.getValue());
 		return element;
+	}
+
+	public XmlFile getXmlFileFromList(String execName, List<XmlFile> files) {
+		logger.info(execName + " " + files.size());
+		for (XmlFile file : files) {
+			if (file.getExecName().equals(execName))
+				return file;
+		}
+		return null;
 	}
 }
