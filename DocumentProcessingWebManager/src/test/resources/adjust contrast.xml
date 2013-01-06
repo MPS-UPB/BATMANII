@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<task xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="adjust contrast.xsd">
+  <inputFile name=""/>
+  <outputFile name=""/>
+  <value>0</value>
+</task>
