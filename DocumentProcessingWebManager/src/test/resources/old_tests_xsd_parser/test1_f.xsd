@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:attribute name="test3" type="xs:string" fixed="TEST3" use="required">
+	<xs:restriction base="xs:string">
+	<xs:minLength value="7"/>
+	<xs:maxLength value="unbounded"/>
+	</xs:restriction>
+</xs:attribute>
+
+</xs:schema>

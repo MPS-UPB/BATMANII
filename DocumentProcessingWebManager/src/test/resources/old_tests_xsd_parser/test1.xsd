@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:simpleType name="test1">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="test3"/>
+		<xs:enumeration value="Test3"/>
+		<xs:enumeration value="TEST3"/>
+	<xs:length value="5"/>
+	</xs:restriction>
+</xs:simpleType>
+
+</xs:schema>

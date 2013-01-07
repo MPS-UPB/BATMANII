@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="test6" type="full_elem_info"/>
+
+<xs:complexType name="elem_info">
+  <xs:sequence>
+    <xs:element name="elem1" type="xs:string"/>
+    <xs:element name="elem2" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="full_elem_info">
+  <xs:complexContent>
+    <xs:extension base="elem_info">
+      <xs:sequence>
+        <xs:element name="elem3" type="xs:string"/>
+        <xs:element name="elem4" type="xs:string"/>
+      </xs:sequence>
+    </xs:extension>
+  </xs:complexContent>
+</xs:complexType> 
+
+</xs:schema>

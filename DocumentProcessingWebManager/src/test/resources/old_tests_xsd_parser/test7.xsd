@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="test3">
+	<xs:complexType>
+		<xs:simpleContent>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="7"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:element>
+
+</xs:schema>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="test5" type="type5">
+  <xs:complexType>
+  <xs:sequence>
+	<xs:element name="elem1" type="xs:string">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="test5"/>
+				<xs:enumeration value="TEST5"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="elem3" type="xs:boolean"/>
+  </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>

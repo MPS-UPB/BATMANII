@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.w3schools.com"
+xmlns="http://www.w3schools.com"
+elementFormDefault="qualified">
+
+<xs:element name="test4" type="type4">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="elem1" type="xs:string" minOccurs="2" maxOccurs="3"/>
+      <xs:element name="elem2" type="xs:integer" minOccurs="1" maxOccurs="unbounded"/>
+	  <xs:element name="elem3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>

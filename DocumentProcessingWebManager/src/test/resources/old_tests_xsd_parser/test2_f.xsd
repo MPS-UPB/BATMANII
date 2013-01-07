@@ -1,0 +1,9 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+<xs:complexType name="element-name">
+	<xs:sequence>
+		<xs:attribute name="attribute-name" type="xs:string" use="optional" default="string-value"/>
+	</xs:sequence>
+</xs:complexType>
+
+</xs:schema>

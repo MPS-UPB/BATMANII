@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:simpleType name="test2">
+	<xs:restriction base="xs:integer">
+	<xs:minInclusive value="1"/>
+	<xs:maxInclusive value="11"/>
+	<xs:minLength value="7"/>
+	<xs:maxLength value="10"/>
+	<xs:pattern value="([0-9])*"/>
+	<xs:whiteSpace value="collapse"/>
+	</xs:restriction>
+</xs:simpleType>
+
+</xs:schema>
