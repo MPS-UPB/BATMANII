@@ -33,6 +33,18 @@
 					buton</a>
 			</div>
 		</div>
+		<form:form modelAttribute="uploadItem" method="post" enctype="multipart/form-data" id="item">
+             <fieldset>
+					<p>
+						<form:label for="fileData" path="fileData">Upload Files</form:label><br/> 
+						<form:input path="fileData" type="file"/>                 
+					</p>
+					
+					<p>
+						<input type="submit" value="Upload" />
+					</p>               
+			</fieldset>         
+		</form:form> 
 	</section>
 
 	<%@ include file="/WEB-INF/views/footer.jsp"%>
