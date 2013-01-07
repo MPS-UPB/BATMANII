@@ -30,6 +30,7 @@
 		<property name="execsFolder" value="${config.execsFolder}" />
 		<property name="uploadedImagesFolder" value="${config.uploadedImagesFolder}" />
 		<property name="results" value="${config.results}" />
+		<property name="xmlFolder" value="${config.xmlFolder}" />
 	</bean>
 
 	<!-- singletons in application -->

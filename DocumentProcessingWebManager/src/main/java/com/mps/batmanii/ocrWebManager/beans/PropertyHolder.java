@@ -14,6 +14,7 @@ public class PropertyHolder {
 	private String execsFolder;
 	private String uploadedImagesFolder;
 	private String results;
+	private String xmlFolder;
 
 	/**
 	 * Zero constructor
@@ -48,6 +49,14 @@ public class PropertyHolder {
 
 	public void setExecsFolder(String execsFolder) {
 		this.execsFolder = execsFolder;
+	}
+	
+	public String getXmlFolder() {
+		return xmlFolder;
+	}
+
+	public void setXmlFolder(String xmlFolder) {
+		this.xmlFolder = xmlFolder;
 	}
 
 	public String getUploadedImagesFolder() {
