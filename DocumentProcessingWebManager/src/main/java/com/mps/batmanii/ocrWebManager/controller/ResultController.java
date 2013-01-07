@@ -2,6 +2,7 @@ package com.mps.batmanii.ocrWebManager.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -92,51 +93,80 @@ public class ResultController {
 			{
 			System.out.println("i= "+i+" "+fisiere_xml.get(i).getExecType());
 			}
-		
-		/*setez cale input si output pentru primul xml*/
-		for (int i = 0; i < fisiere_xml.get(0).getXmlElements().size(); i++)
-		{
-		if(fisiere_xml.get(0).getXmlElements().get(i).getName().equals("inputFile"))
+		String output_file_value=new String("");
+		/*setez cale input si output pentru fisierele xml*/
+		for(int index_xml = 0; index_xml < fisiere_xml.size(); index_xml++)
+		{	
+			System.out.println("index_xml= "+index_xml);
+			for (int i = 0; i < fisiere_xml.get(0).getXmlElements().size(); i++)
 			{
-			fisiere_xml.get(0).getXmlElements().get(i+1).setValue(propertyHolder.getUploadedImagesFolder()+fisiere_xml.get(0).getXmlElements().get(i+1).getValue());
-			System.out.println("inputfile: "+fisiere_xml.get(0).getXmlElements().get(i+1).getName()+" "+fisiere_xml.get(0).getXmlElements().get(i+1).getValue());
-			}
-		if(fisiere_xml.get(0).getXmlElements().get(i).getName().equals("outputFile"))
-			{
-			fisiere_xml.get(0).getXmlElements().get(i+1).setValue(propertyHolder.getResults()+fisiere_xml.get(0).getXmlElements().get(i+1).getValue());
-			System.out.println("outputfile: "+ fisiere_xml.get(0).getXmlElements().get(i+1).getName()+" "+fisiere_xml.get(0).getXmlElements().get(i+1).getValue());
+				if(index_xml == 0)
+				{
+					if(fisiere_xml.get(index_xml).getXmlElements().get(i).getName().equals("inputFile"))
+					{
+						fisiere_xml.get(index_xml).getXmlElements().get(i+1).setValue(propertyHolder.getUploadedImagesFolder()+fisiere_xml.get(index_xml).getXmlElements().get(i+1).getValue());
+						System.out.println("inputfile: "+fisiere_xml.get(index_xml).getXmlElements().get(i+1).getName()+" "+fisiere_xml.get(index_xml).getXmlElements().get(i+1).getValue());
+					}
+					if(fisiere_xml.get(index_xml).getXmlElements().get(i).getName().equals("outputFile"))
+					{
+						fisiere_xml.get(index_xml).getXmlElements().get(i+1).setValue(propertyHolder.getResults()+fisiere_xml.get(index_xml).getXmlElements().get(i+1).getValue());
+						output_file_value = fisiere_xml.get(index_xml).getXmlElements().get(i+1).getValue();
+						System.out.println("outputfile: "+ fisiere_xml.get(index_xml).getXmlElements().get(i+1).getName()+" "+fisiere_xml.get(index_xml).getXmlElements().get(i+1).getValue());
+						break;
+					}
+				}
+				else
+				{
+					if(fisiere_xml.get(index_xml).getXmlElements().get(i).getName().equals("inputFile"))
+					{
+						fisiere_xml.get(index_xml).getXmlElements().get(i+1).setValue(output_file_value);
+						System.out.println("inputfile: "+fisiere_xml.get(index_xml).getXmlElements().get(i+1).getName()+" "+fisiere_xml.get(index_xml).getXmlElements().get(i+1).getValue());
+					}
+					if(fisiere_xml.get(index_xml).getXmlElements().get(i).getName().equals("outputFile"))
+					{
+						fisiere_xml.get(index_xml).getXmlElements().get(i+1).setValue(propertyHolder.getResults()+fisiere_xml.get(index_xml).getXmlElements().get(i+1).getValue());
+						output_file_value = fisiere_xml.get(index_xml).getXmlElements().get(i+1).getValue();
+						System.out.println("outputfile: "+ fisiere_xml.get(index_xml).getXmlElements().get(i+1).getName()+" "+fisiere_xml.get(index_xml).getXmlElements().get(i+1).getValue());
+						break;
+					}
+				}
 			}
 		}
 		selectedXmlFiles.setXmlFiles(fisiere_xml);
 		
-		/*creare xml*/
-		CreateXml nou = new CreateXml();
+		for(int index_xml = 0; index_xml < fisiere_xml.size(); index_xml++)
+		{
+			/*creare xml*/
+			CreateXml nou = new CreateXml();
 	
-		nou.generateXml(propertyHolder.getXmlFolder()+fisiere_xml.get(0).getExecName().substring(0, fisiere_xml.get(0).getExecName().indexOf('.'))+".xml",fisiere_xml.get(0).getXmlElements());
-		
-		/*rularea executabilului*/
-		Runtime r=Runtime.getRuntime();
-		Process p=null;
-		try {
-			String[] cmd = {propertyHolder.getExecsFolder()+fisiere_xml.get(0).getExecName(), propertyHolder.getXmlFolder()+fisiere_xml.get(0).getExecName().substring(0, fisiere_xml.get(0).getExecName().indexOf('.'))+".xml"};
-			for(int i=0; i<2; i++)
-				System.out.println("cmd= " + cmd[i]);
-			p=r.exec(cmd);
-			p.waitFor();
-			InputStream in = p.getInputStream();
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			int c = -1; 
-			while((c = in.read()) != -1) 
-			{                
-				baos.write(c);     
+			nou.generateXml(propertyHolder.getXmlFolder()+fisiere_xml.get(index_xml).getExecName().substring(0, fisiere_xml.get(index_xml).getExecName().indexOf('.'))+".xml",fisiere_xml.get(index_xml).getXmlElements());
+			
+			/*rularea executabilului*/
+			Runtime r=Runtime.getRuntime();
+			Process p=null;
+			try {
+				String[] cmd = {propertyHolder.getExecsFolder()+fisiere_xml.get(index_xml).getExecName(), propertyHolder.getXmlFolder()+fisiere_xml.get(index_xml).getExecName().substring(0, fisiere_xml.get(index_xml).getExecName().indexOf('.'))+".xml"};
+				for(int i=0; i<2; i++)
+					System.out.println("cmd= " + cmd[i]);
+				p=r.exec(cmd);
+				p.waitFor();
+				InputStream in = p.getInputStream();
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				int c = -1; 
+				while((c = in.read()) != -1) 
+				{                
+					baos.write(c);     
+				}
+				String response = new String(baos.toByteArray());
+				System.out.println("Response From Exe : "+response); 
 			}
-			String response = new String(baos.toByteArray());
-			System.out.println("Response From Exe : "+response); 
+			catch(Exception e){
+				System.out.println(e);
+				e.printStackTrace();
+			}
 		}
-		catch(Exception e){
-			System.out.println(e);
-			e.printStackTrace();
-		}
+		
+		selectedXmlFiles.setXmlFiles(new ArrayList<XmlFile>());
 		
 		return "result";
 	}
