@@ -114,7 +114,7 @@ tfe.printStackTrace();
 
 public static void main(String argv[]) {
 
-	CreateXml nou = new CreateXml();
+	/*CreateXml nou = new CreateXml();
 	
 	TestXml t = new TestXml(nou);
 	
@@ -128,6 +128,6 @@ public static void main(String argv[]) {
 	t.doTestLayout(nou);
 	t.doTestRotate(nou);
 	t.doTestOtsu(nou);
-	t.doTestTesseract(nou);
+	t.doTestTesseract(nou);*/
 }
 }
