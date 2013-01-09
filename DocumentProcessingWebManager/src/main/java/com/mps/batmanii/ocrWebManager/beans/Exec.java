@@ -1,10 +1,13 @@
 package com.mps.batmanii.ocrWebManager.beans;
 
+import java.util.List;
+
 public class Exec {
 
 	private String execName;
 	private String fullExecName;
 	private String execType;
+	List<String> allExecTypes;
 
 	public Exec(String fullExecName) {
 		super();
@@ -27,6 +30,14 @@ public class Exec {
 		return fullExecName;
 	}
 
+	public List<String> getAllExecTypes() {
+		return allExecTypes;
+	}
+
+	public void setAllExecTypes(List<String> allExecTypes) {
+		this.allExecTypes = allExecTypes;
+	}
+
 	public void setFullExecName(String fullExecName) {
 		this.fullExecName = fullExecName;
 	}
@@ -40,6 +51,12 @@ public class Exec {
 	}
 
 	public String toString() {
-		return execName + "<-> " + execType;
+		StringBuilder builder = new StringBuilder();
+		builder.append(execName + "<->");
+		builder.append(execType + "<->");
+		for (String s : allExecTypes) {
+			builder.append(s + "-");
+		}
+		return builder.toString();
 	}
 }

@@ -11,7 +11,9 @@ public class XmlFile {
 
 	private String execType;
 	private String execName;
+	private List<String> allExecTypes;
 	private Component rootElement;
+
 	@Override
 	public String toString() {
 		return "XmlFile [execType=" + execType + ", execName=" + execName
@@ -64,6 +66,14 @@ public class XmlFile {
 
 	public void setXmlElements(List<XmlElement> xmlElements) {
 		this.xmlElements = xmlElements;
+	}
+
+	public List<String> getAllExecTypes() {
+		return allExecTypes;
+	}
+
+	public void setAllExecTypes(List<String> allExecTypes) {
+		this.allExecTypes = allExecTypes;
 	}
 
 }

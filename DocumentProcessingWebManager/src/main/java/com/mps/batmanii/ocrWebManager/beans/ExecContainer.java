@@ -33,10 +33,25 @@ public class ExecContainer {
 
 		File folder = new File(propertyHolder.getExecsFolder());
 		for (File fileEntry : folder.listFiles()) {
-			Exec exec = new Exec(fileEntry.getName());
-			exec.setExecType(getExecTypeByExecName(fileEntry.getName()));
-			logger.info(exec.getExecName() + " " + exec.getExecType());
-			execs.add(exec);
+			if (fileEntry.getName().contains(".exe")) {
+				Exec exec = new Exec(fileEntry.getName());
+				String execType = getExecTypeByExecName(fileEntry.getName());
+				String[] split = execType.split(",");
+				logger.info(split.length + "");
+				List<String> allExecTypes = new ArrayList<String>();
+				for (int i = 0; i < split.length; i++) {
+					logger.info(split[i]);
+					allExecTypes.add(split[i]);
+				}
+				exec.setExecType(execType);
+				exec.setAllExecTypes(allExecTypes);
+				logger.info("Executabil:" + exec.getExecName() + " "
+						+ exec.getExecType());
+				execs.add(exec);
+			} else {
+				logger.info("Fisierul " + fileEntry.getName()
+						+ " nu este un executabil");
+			}
 		}
 	}
 
@@ -67,7 +82,7 @@ public class ExecContainer {
 								.compareTo(execName) == 0) {
 					for (int k = 0; k < listSimpleType.size(); k++) {
 						if (listSimpleType.get(k).getName()
-								.compareTo("execType") == 0){
+								.compareTo("execType") == 0) {
 							return listSimpleType.get(k).getPattern();
 						}
 					}
