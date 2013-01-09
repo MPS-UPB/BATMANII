@@ -82,11 +82,13 @@
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											preprocessing</h3></li>
 									<c:forEach var="exec" items="${execs}">
-										<c:if test="${exec.execType==\"preprocessing\"}">
-											<li><a
-												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
-													type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
-										</c:if>
+										<c:forEach var="execType" items="${exec.allExecTypes}">
+											<c:if test="${execType == \"preprocessing\"}">
+												<li><a
+													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
+														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+											</c:if>
+										</c:forEach>
 									</c:forEach>
 
 								</ul>
@@ -96,11 +98,13 @@
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											binarization</h3></li>
 									<c:forEach var="exec" items="${execs}">
-										<c:if test="${exec.execType==\"binarization\"}">
-											<li><a
-												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
-													type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
-										</c:if>
+										<c:forEach var="execType" items="${exec.allExecTypes}">
+											<c:if test="${execType == \"binarization\"}">
+												<li><a
+													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
+														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+											</c:if>
+										</c:forEach>
 									</c:forEach>
 								</ul>
 
@@ -110,11 +114,13 @@
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											layout</h3></li>
 									<c:forEach var="exec" items="${execs}">
-										<c:if test="${exec.execType==\"layout\"}">
-											<li><a
-												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
-													type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
-										</c:if>
+										<c:forEach var="execType" items="${exec.allExecTypes}">
+											<c:if test="${execType == \"layout\"}">
+												<li><a
+													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
+														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+											</c:if>
+										</c:forEach>
 									</c:forEach>
 								</ul>
 
@@ -123,11 +129,13 @@
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											paging</h3></li>
 									<c:forEach var="exec" items="${execs}">
-										<c:if test="${exec.execType==\"paging\"}">
-											<li><a
-												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
-													type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
-										</c:if>
+										<c:forEach var="execType" items="${exec.allExecTypes}">
+											<c:if test="${execType == \"paging\"}">
+												<li><a
+													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
+														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+											</c:if>
+										</c:forEach>
 									</c:forEach>
 								</ul>
 
@@ -136,11 +144,13 @@
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											ocr</h3></li>
 									<c:forEach var="exec" items="${execs}">
-										<c:if test="${exec.execType==\"ocr\"}">
-											<li><a
-												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
-													type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
-										</c:if>
+										<c:forEach var="execType" items="${exec.allExecTypes}">
+											<c:if test="${execType == \"ocr\"}">
+												<li><a
+													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
+														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+											</c:if>
+										</c:forEach>
 									</c:forEach>
 								</ul>
 
@@ -149,11 +159,13 @@
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											hierarchy</h3></li>
 									<c:forEach var="exec" items="${execs}">
-										<c:if test="${exec.execType==\"hierarchy\"}">
-											<li><a
-												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
-													type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
-										</c:if>
+										<c:forEach var="execType" items="${exec.allExecTypes}">
+											<c:if test="${execType == \"hierarchy\"}">
+												<li><a
+													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
+														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+											</c:if>
+										</c:forEach>
 									</c:forEach>
 								</ul>
 
@@ -162,11 +174,13 @@
 									<li><h3 class="ui-widget-header ui-corner-all">Executables
 											pdf-exporter</h3></li>
 									<c:forEach var="exec" items="${execs}">
-										<c:if test="${exec.execType==\"pdf\"}">
-											<li><a
-												href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${exec.execType}"><input
-													type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
-										</c:if>
+										<c:forEach var="execType" items="${exec.allExecTypes}">
+											<c:if test="${execType == \"pdf-exporter\"}">
+												<li><a
+													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
+														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+											</c:if>
+										</c:forEach>
 									</c:forEach>
 								</ul>
 
@@ -184,10 +198,10 @@
 												<td>${selexec.execName}</td>
 												<td>->Type ${selexec.execType}</td>
 												<td><a
-													href="/ocrwebmanager/ocr/parameter?execName=${selexec.execName}&execType=${exec.execType}"><input
+													href="/ocrwebmanager/ocr/parameter?execName=${selexec.execName}&execType=${selexec.execType}"><input
 														type="button" value="Modify"></a></td>
 												<td><a
-													href="/ocrwebmanager/ocr/delete?execName=${selexec.execName}&execType=${exec.execType}"><input
+													href="/ocrwebmanager/ocr/delete?execName=${selexec.execName}&execType=${selexec.execType}"><input
 														type="button" value="Delete"></a></td>
 
 											</tr>
@@ -198,8 +212,9 @@
 						</td>
 					</tr>
 				</table>
-			</div>	<a class="button-1" href="/ocrwebmanager/result">Process</a>
-	
+			</div>
+			<a class="button-1" href="/ocrwebmanager/result">Process</a>
+
 		</div>
 	</section>
 	<input id="selectedExecs" hidden="true" value="${selectedExecs}"></input>

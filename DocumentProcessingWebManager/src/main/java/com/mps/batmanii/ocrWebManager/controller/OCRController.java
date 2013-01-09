@@ -114,11 +114,16 @@ public class OCRController {
 		logger.info("Se acceseaza pagina pentru introducerea parametrilor pentru "
 				+ execName + " de tipul " + execType);
 
+		XsdToXml xsdToXml = new XsdToXml();
+
 		Exec exec = new Exec();
 		exec.setExecName(execName);
 		exec.setFullExecName(execName.concat(".exe"));
 		exec.setExecType(execType);
-
+		for (Exec exec2 : execContainer.getExecs()) {
+			if (exec2.getExecName().equals(execName))
+				exec.setAllExecTypes(exec2.getAllExecTypes());
+		}
 		List<Exec> alreadySelectedExecs = selectedExecs.getSelectedExecs();
 		boolean isSel = false;
 		for (Exec ex : alreadySelectedExecs) {
@@ -126,7 +131,6 @@ public class OCRController {
 				isSel = true;
 		}
 
-		XsdToXml xsdToXml = new XsdToXml();
 		xsdToXml.setXsdContainer(xsdContainer);
 
 		XmlFile xmlFile = null;
@@ -145,6 +149,8 @@ public class OCRController {
 					.concat(".exe"));
 			// Se creaza un obiect de tipul XmlFile din obiectul XsdFile
 			xmlFile = xsdToXml.getXmlFileFromXsdFile(xsdFile);
+			xmlFile.setExecName(exec.getExecName());
+			xmlFile.setAllExecTypes(exec.getAllExecTypes());
 			xmlElements = xsdToXml.getXmlElements(xmlFile);
 
 		}
@@ -177,6 +183,7 @@ public class OCRController {
 	@RequestMapping("/doSave")
 	public String save(XmlElementFormList formList, Model model,
 			HttpSession session) {
+		logger.info("Salvare");
 		// primesc obiectele
 		String execName = (String) session.getAttribute("execName");
 		String execType = (String) session.getAttribute("execType");
@@ -188,6 +195,10 @@ public class OCRController {
 		exec.setExecName(execName);
 		exec.setFullExecName(execName.concat(".exe"));
 		exec.setExecType(execType);
+		for (Exec exec2 : execContainer.getExecs()) {
+			if (exec2.getExecName().equals(execName))
+				exec.setAllExecTypes(exec2.getAllExecTypes());
+		}
 
 		List<Exec> alreadySelectedExecs = selectedExecs.getSelectedExecs();
 		boolean isSel = false;
@@ -211,26 +222,61 @@ public class OCRController {
 					.concat(".exe"));
 			// Se creaza un obiect de tipul XmlFile din obiectul XsdFile
 			xmlFile = xsdToXml.getXmlFileFromXsdFile(xsdFile);
+			xmlFile.setExecType(exec.getExecType());
+			xmlFile.setAllExecTypes(exec.getAllExecTypes());
 		}
 
 		List<XmlElement> xmlElements = xsdToXml.createXmlElements(formList
 				.getXmlElements());
 		xmlFile.setXmlElements(xmlElements);
-		List<XmlFile> existingXmlFiles = selectedXmlFiles.getXmlFiles();
-		existingXmlFiles.add(xmlFile);
-		selectedXmlFiles.setXmlFiles(existingXmlFiles);
-
-		logger.info("S-au salvat urmatoarele  date:");
-		XmlFile xmlFileSaved = selectedXmlFiles.getXmlFiles().get(
-				selectedXmlFiles.getXmlFiles().size() - 1);
-		logger.info(xmlFileSaved.getExecName());
-		logger.info(xmlFileSaved.getExecType());
-		logger.info(xmlFileSaved.getRootElement().getName());
-		List<XmlElement> xmlElementsSaved = xmlFileSaved.getXmlElements();
-		for (XmlElement element : xmlElementsSaved) {
-			logger.info(element.getName() + ":" + element.getValue() + " "
-					+ element.getLevel() + " " + element.getAttribute());
+		if (isSel == true) {
+			int pozXml = 0;
+			List<XmlFile> existingXmlFiles = selectedXmlFiles.getXmlFiles();
+			for (int i = 0; i < existingXmlFiles.size(); i++) {
+				if (existingXmlFiles.get(i).getExecName()
+						.equals(execName.concat(".exe"))) {
+					pozXml = i;
+				}
+			}
+			existingXmlFiles.set(pozXml, xmlFile);
+			selectedXmlFiles.setXmlFiles(existingXmlFiles);
+			logger.info("S-au salvat urmatoarele  date:");
+			XmlFile xmlFileSaved = selectedXmlFiles.getXmlFiles().get(pozXml);
+			logger.info(xmlFileSaved.getExecName());
+			logger.info(xmlFileSaved.getExecType());
+			StringBuilder builder = new StringBuilder();
+			for (String s : xmlFileSaved.getAllExecTypes()) {
+				builder.append(s + "-");
+			}
+			logger.info(builder.toString());
+			logger.info(xmlFileSaved.getRootElement().getName());
+			List<XmlElement> xmlElementsSaved = xmlFileSaved.getXmlElements();
+			for (XmlElement element : xmlElementsSaved) {
+				logger.info(element.getName() + ":" + element.getValue() + " "
+						+ element.getLevel() + " " + element.getAttribute());
+			}
+		} else {
+			List<XmlFile> existingXmlFiles = selectedXmlFiles.getXmlFiles();
+			existingXmlFiles.add(xmlFile);
+			selectedXmlFiles.setXmlFiles(existingXmlFiles);
+			logger.info("S-au salvat urmatoarele  date:");
+			XmlFile xmlFileSaved = selectedXmlFiles.getXmlFiles().get(
+					selectedXmlFiles.getXmlFiles().size() - 1);
+			logger.info(xmlFileSaved.getExecName());
+			logger.info(xmlFileSaved.getExecType());
+			StringBuilder builder = new StringBuilder();
+			for (String s : xmlFileSaved.getAllExecTypes()) {
+				builder.append(s + "-");
+			}
+			logger.info(builder.toString());
+			logger.info(xmlFileSaved.getRootElement().getName());
+			List<XmlElement> xmlElementsSaved = xmlFileSaved.getXmlElements();
+			for (XmlElement element : xmlElementsSaved) {
+				logger.info(element.getName() + ":" + element.getValue() + " "
+						+ element.getLevel() + " " + element.getAttribute());
+			}
 		}
+
 		return "redirect:/ocr";
 	}
 
@@ -278,5 +324,5 @@ public class OCRController {
 
 		return "redirect:/ocr";
 	}
-	
+
 }
