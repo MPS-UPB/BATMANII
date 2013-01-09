@@ -37,8 +37,7 @@
              <fieldset>
 					<p>
 						<form:label for="fileData" path="fileData">Upload Files</form:label><br/> 
-						<form:input path="fileData" type="file"/>    
-						<input type="file"/>             
+						<form:input path="fileData" type="file"/>             
 					</p>
 					
 					<p>
