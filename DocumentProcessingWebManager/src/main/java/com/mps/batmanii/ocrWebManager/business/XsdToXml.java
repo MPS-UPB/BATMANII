@@ -168,6 +168,7 @@ public class XsdToXml {
 	}
 
 	// ToDo Bersy
+	// SA adaugi minOccurs si maxOccurs
 	public List<XmlElement> getXmlElements(XmlFile xmlFile) {
 
 		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();

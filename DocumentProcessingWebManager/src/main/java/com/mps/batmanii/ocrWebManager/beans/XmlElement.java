@@ -12,6 +12,8 @@ public class XmlElement {
 	private boolean attribute;
 	private int level;
 	private SimpleType simpleType;
+	private int minOccurs;
+	private int maxOccurs;
 
 	public XmlElement() {
 		super();
@@ -72,6 +74,22 @@ public class XmlElement {
 
 	public void setSimpleType(SimpleType simpleType) {
 		this.simpleType = simpleType;
+	}
+
+	public int getMinOccurs() {
+		return minOccurs;
+	}
+
+	public void setMinOccurs(int minOccurs) {
+		this.minOccurs = minOccurs;
+	}
+
+	public int getMaxOccurs() {
+		return maxOccurs;
+	}
+
+	public void setMaxOccurs(int maxOccurs) {
+		this.maxOccurs = maxOccurs;
 	}
 
 }
