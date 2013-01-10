@@ -1,5 +1,9 @@
 <%@ include file="/WEB-INF/views/head.jsp"%>
 <title>OCR Page</title>
+<script type="text/javascript" src="/ocrwebmanager/dwr/engine.js"></script>
+<script type="text/javascript" src="/ocrwebmanager/dwr/util.js"></script>
+<script type="text/javascript"
+	src="/ocrwebmanager/dwr/interface/dwrService.js"></script>
 <script type="text/javascript">
 	function isChecked(checkboxId, execsId) {
 		if (document.getElementById(checkboxId).checked == true) {
@@ -18,11 +22,40 @@
 		}
 	}
 
-	function verify() {
+	function verifyExecs(button) {
+		var execName = button.value;
+		var result;
+		dwrService.verifySelected(execName, {
+			async : false,
+			callback : function(dataFromServer) {
+				result = dwr.util.toDescriptiveString(dataFromServer, 3);
+			}
+		});
+		if (result.indexOf("Ok") != -1)
+			return true;
+		else {
+			alert(result);
+			return false;
+		}
+	}
+
+	function verifySubmit() {
+		dwrService.verifySubmit({
+			async : false,
+			callback : function(dataFromServer) {
+				result = dwr.util.toDescriptiveString(dataFromServer, 3);
+			}
+		});
+		if (result.indexOf("Ok") != -1)
+			return true;
+		else {
+			alert(result);
+			return false;
+		}
 	}
 </script>
 </head>
-<body id="page2" onload="verify();">
+<body id="page2">
 	<!--==============================header=================================-->
 	<header>
 		<div class="row-top">
@@ -86,7 +119,8 @@
 											<c:if test="${execType == \"preprocessing\"}">
 												<li><a
 													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
-														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+														type="button" onclick="return verifyExecs(this);"
+														value="${exec.execName}" title="Add"></a><br></li>
 											</c:if>
 										</c:forEach>
 									</c:forEach>
@@ -102,7 +136,8 @@
 											<c:if test="${execType == \"binarization\"}">
 												<li><a
 													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
-														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+														type="button" value="${exec.execName}" title="Add"
+														onclick="return verifyExecs(this);"></a><br></li>
 											</c:if>
 										</c:forEach>
 									</c:forEach>
@@ -118,7 +153,8 @@
 											<c:if test="${execType == \"layout\"}">
 												<li><a
 													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
-														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+														type="button" onclick="return verifyExecs(this);"
+														value="${exec.execName}" title="Add"></a><br></li>
 											</c:if>
 										</c:forEach>
 									</c:forEach>
@@ -133,7 +169,8 @@
 											<c:if test="${execType == \"paging\"}">
 												<li><a
 													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
-														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+														type="button" onclick="return verifyExecs(this);"
+														value="${exec.execName}" title="Add"></a><br></li>
 											</c:if>
 										</c:forEach>
 									</c:forEach>
@@ -148,7 +185,8 @@
 											<c:if test="${execType == \"ocr\"}">
 												<li><a
 													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
-														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+														type="button" onclick="return verifyExecs(this);"
+														value="${exec.execName}" title="Add"></a><br></li>
 											</c:if>
 										</c:forEach>
 									</c:forEach>
@@ -163,7 +201,8 @@
 											<c:if test="${execType == \"hierarchy\"}">
 												<li><a
 													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
-														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+														type="button" onclick="return verifyExecs(this);"
+														value="${exec.execName}" title="Add"></a><br></li>
 											</c:if>
 										</c:forEach>
 									</c:forEach>
@@ -178,7 +217,8 @@
 											<c:if test="${execType == \"pdf-exporter\"}">
 												<li><a
 													href="/ocrwebmanager/ocr/parameter?execName=${exec.execName}&execType=${execType}"><input
-														type="button" value="${exec.execName}" title="Add/Modify"></a><br></li>
+														type="button" onclick="return verifyExecs(this);"
+														value="${exec.execName}" title="Add"></a><br></li>
 											</c:if>
 										</c:forEach>
 									</c:forEach>
@@ -202,7 +242,8 @@
 														type="button" value="Modify"></a></td>
 												<td><a
 													href="/ocrwebmanager/ocr/delete?execName=${selexec.execName}&execType=${selexec.execType}"><input
-														type="button" value="Delete"></a></td>
+														type="button" value="Delete"
+														onclick="return confirm('You will delete this executable from the selected ones!Are you sure?');"></a></td>
 
 											</tr>
 										</c:forEach>
@@ -213,7 +254,8 @@
 					</tr>
 				</table>
 			</div>
-			<a class="button-1" href="/ocrwebmanager/result">Process</a>
+			<a class="button-1" href="/ocrwebmanager/result"
+				onclick="return verifySubmit();">Process</a>
 
 		</div>
 	</section>
