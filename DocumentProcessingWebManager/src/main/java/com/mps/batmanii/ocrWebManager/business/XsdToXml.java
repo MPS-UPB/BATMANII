@@ -227,6 +227,8 @@ public class XsdToXml {
 		}
 		xmlElementForm.setSimpleType(element.getSimpleType());
 		xmlElementForm.setValue(element.getValue());
+		xmlElementForm.setMinOccurs(element.getMinOccurs());
+		xmlElementForm.setMaxOccurs(element.getMaxOccurs());
 		return xmlElementForm;
 	}
 
@@ -251,6 +253,8 @@ public class XsdToXml {
 		simpleType.setEnumeration(form.getEnumeration());
 		element.setSimpleType(simpleType);
 		element.setValue(form.getValue());
+		element.setMaxOccurs(form.getMaxOccurs());
+		element.setMinOccurs(form.getMinOccurs());
 		logger.info(element.getName() + " " + element.getValue());
 		return element;
 	}

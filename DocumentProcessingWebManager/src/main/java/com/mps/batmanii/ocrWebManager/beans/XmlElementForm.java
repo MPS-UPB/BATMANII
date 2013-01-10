@@ -10,6 +10,8 @@ public class XmlElementForm {
 	private Vector<String> enumeration;
 	private SimpleType simpleType;
 	private boolean toDisplay;
+	private int minOccurs;
+	private int maxOccurs;
 
 	public String getName() {
 		return name;
@@ -65,6 +67,22 @@ public class XmlElementForm {
 
 	public void setEnumeration(Vector<String> enumeration) {
 		this.enumeration = enumeration;
+	}
+
+	public int getMinOccurs() {
+		return minOccurs;
+	}
+
+	public void setMinOccurs(int minOccurs) {
+		this.minOccurs = minOccurs;
+	}
+
+	public int getMaxOccurs() {
+		return maxOccurs;
+	}
+
+	public void setMaxOccurs(int maxOccurs) {
+		this.maxOccurs = maxOccurs;
 	}
 
 }

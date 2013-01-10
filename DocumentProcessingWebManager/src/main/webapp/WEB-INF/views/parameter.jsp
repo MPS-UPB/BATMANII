@@ -79,14 +79,12 @@
 										<td colspan="${xmlElement.level }" align="right">${xmlElement.name}</td>
 										<td><form:select id="mySelect"
 												path="xmlElements[${s.index}].value">
-												<c:forEach items="${xmlElement.enumeration}"
-													var="enum">
+												<c:forEach items="${xmlElement.enumeration}" var="enum">
 													<form:option value="${enum}" label="${enum}" />
 												</c:forEach>
 											</form:select></td>
 										<td>Possible values are :</td>
-										<c:forEach items="${xmlElement.enumeration}"
-											var="enum">
+										<c:forEach items="${xmlElement.enumeration}" var="enum">
 											<td>${enum};</td>
 										</c:forEach>
 									</c:if>
@@ -98,6 +96,8 @@
 								<form:hidden path="xmlElements[${s.index}].level" />
 								<form:hidden path="xmlElements[${s.index}].name" />
 								<form:hidden path="xmlElements[${s.index}].enumeration" />
+								<form:hidden path="xmlElements[${s.index}].minOccurs" />
+								<form:hidden path="xmlElements[${s.index}].maxOccurs" />
 								<!--<form:hidden path="xmlElements[${s.index}].simpleType" />-->
 							<tr>
 						</c:forEach>
