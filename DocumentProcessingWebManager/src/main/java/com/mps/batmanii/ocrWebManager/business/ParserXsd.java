@@ -45,17 +45,26 @@ public class ParserXsd {
 	}
 
 	@SuppressWarnings("unchecked")
-	public XsdFile parse(String filename) throws SAXException, IOException {
+	public XsdFile parse(String filename) throws SAXException {
 		XsdFile xsdFile = new XsdFile(filename);
-		//logger.info("Filename " + filename);
-		File file = new File(filename);
-
+		// logger.info("Filename " + filename);
+		File file = null;
+		try {
+			file = new File(filename);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		LinkedList<ElementType> elementList = new LinkedList<ElementType>();
 		LinkedList<SimpleType> simpleList = new LinkedList<SimpleType>();
 		LinkedList<ComplexType> complexTypes = new LinkedList<ComplexType>();
 
 		XSOMParser parser = new XSOMParser();
-		parser.parse(file);
+		try {
+			parser.parse(file);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		XSSchemaSet sset = parser.getResult();
 		XSSchema gtypesSchema = sset.getSchema(1);
 
@@ -64,9 +73,9 @@ public class ParserXsd {
 			XSComplexType ct = (XSComplexType) ctiter.next();
 			complexTypes.add(printElements(ct));
 		}
-		//for (int i = 0; i < complexTypes.size(); i++)
+		// for (int i = 0; i < complexTypes.size(); i++)
 
-			//System.out.println(complexTypes.get(i));
+		// System.out.println(complexTypes.get(i));
 
 		// Parse simpleType tag ;
 		Map<String, com.sun.xml.xsom.XSSimpleType> simpleTypes = gtypesSchema
@@ -79,7 +88,7 @@ public class ParserXsd {
 					.add(parseSimpleType(((Entry<String, com.sun.xml.xsom.XSSimpleType>) array[i])
 							.getValue()));
 		}
-		//System.out.println(simpleList);
+		// System.out.println(simpleList);
 
 		gtypesSchema.getElementDecls();
 		Map<String, XSElementDecl> elementDecls = gtypesSchema
@@ -97,8 +106,8 @@ public class ParserXsd {
 							new Component(aux.getKey(), aux.getValue()
 									.getType(), 1, 1)));
 		}
-		//for (int i = 0; i < elementList.size(); i++)
-		//	System.out.println(elementList);
+		// for (int i = 0; i < elementList.size(); i++)
+		// System.out.println(elementList);
 		xsdFile.setComplexTypes(complexTypes);
 		xsdFile.setElementType(elementList.get(0));
 		xsdFile.setSimpleTypes(simpleList);

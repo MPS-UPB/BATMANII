@@ -1,10 +1,13 @@
 package com.mps.batmanii.ocrWebManager.beans;
 
+import java.util.Vector;
+
 public class XmlElementForm {
 	private String name;
 	private String value;
 	private boolean attribute;
 	private int level;
+	private Vector<String> enumeration;
 	private SimpleType simpleType;
 	private boolean toDisplay;
 
@@ -56,5 +59,12 @@ public class XmlElementForm {
 		this.toDisplay = toDisplay;
 	}
 
+	public Vector<String> getEnumeration() {
+		return enumeration;
+	}
+
+	public void setEnumeration(Vector<String> enumeration) {
+		this.enumeration = enumeration;
+	}
 
 }

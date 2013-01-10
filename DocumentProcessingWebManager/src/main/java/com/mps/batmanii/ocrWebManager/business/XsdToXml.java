@@ -2,6 +2,7 @@ package com.mps.batmanii.ocrWebManager.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -217,6 +218,13 @@ public class XsdToXml {
 		xmlElementForm.setName(element.getName());
 		xmlElementForm.setLevel(element.getLevel());
 		xmlElementForm.setAttribute(element.getAttribute());
+		if (element.getSimpleType() != null) {
+			if (element.getSimpleType().getEnumeration().size() == 0)
+				xmlElementForm.setEnumeration(new Vector<String>());
+			else
+				xmlElementForm.setEnumeration(element.getSimpleType()
+						.getEnumeration());
+		}
 		xmlElementForm.setSimpleType(element.getSimpleType());
 		xmlElementForm.setValue(element.getValue());
 		return xmlElementForm;
@@ -239,7 +247,9 @@ public class XsdToXml {
 		element.setName(form.getName());
 		element.setLevel(form.getLevel());
 		element.setAttribute(form.getAttribute());
-		element.setSimpleType(form.getSimpleType());
+		SimpleType simpleType = new SimpleType();
+		simpleType.setEnumeration(form.getEnumeration());
+		element.setSimpleType(simpleType);
 		element.setValue(form.getValue());
 		logger.info(element.getName() + " " + element.getValue());
 		return element;
