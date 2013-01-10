@@ -158,7 +158,7 @@ public class XsdToXml {
 		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();
 		xmlElements.add(new XmlElement(execParameter.getName(), null,
 				execParameter.isAttribute(), execParameter.getLevel(),
-				execParameter.getSimpleType()));
+				execParameter.getSimpleType(),execParameter.getMinOccurs(),execParameter.getMaxOccurs()));
 		if (execParameter.getExecParameters() != null)
 			for (ExecParameter execParameter1 : execParameter
 					.getExecParameters()) {
@@ -174,7 +174,7 @@ public class XsdToXml {
 
 		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();
 		xmlElements.add(new XmlElement(xmlFile.getRootElement().getName(),
-				null, false, 0, null));
+				null, false, 0, null,xmlFile.getRootElement().getMinOccurs(),xmlFile.getRootElement().getMaxOccurs()));
 		for (ExecParameter execParameter : xmlFile.getChildrens()) {
 			xmlElements.addAll(parseExecParameter(execParameter));
 		}
