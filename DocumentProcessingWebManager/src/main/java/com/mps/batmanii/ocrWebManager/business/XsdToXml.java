@@ -158,7 +158,8 @@ public class XsdToXml {
 		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();
 		xmlElements.add(new XmlElement(execParameter.getName(), null,
 				execParameter.isAttribute(), execParameter.getLevel(),
-				execParameter.getSimpleType(),execParameter.getMinOccurs(),execParameter.getMaxOccurs()));
+				execParameter.getSimpleType(), execParameter.getMinOccurs(),
+				execParameter.getMaxOccurs()));
 		if (execParameter.getExecParameters() != null)
 			for (ExecParameter execParameter1 : execParameter
 					.getExecParameters()) {
@@ -174,7 +175,8 @@ public class XsdToXml {
 
 		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();
 		xmlElements.add(new XmlElement(xmlFile.getRootElement().getName(),
-				null, false, 0, null,xmlFile.getRootElement().getMinOccurs(),xmlFile.getRootElement().getMaxOccurs()));
+				null, false, 0, null, xmlFile.getRootElement().getMinOccurs(),
+				xmlFile.getRootElement().getMaxOccurs()));
 		for (ExecParameter execParameter : xmlFile.getChildrens()) {
 			xmlElements.addAll(parseExecParameter(execParameter));
 		}
@@ -194,7 +196,13 @@ public class XsdToXml {
 			XmlElementForm xmlElementForm = createFormFromElement(xmlElements
 					.get(i));
 			if (xmlElements.get(i).getAttribute() == true) {
-				xmlElementForm.setToDisplay(true);
+				if (xmlElements.get(i - 1).getAttribute() == false
+						&& (xmlElements.get(i - 1).getName()
+								.equals("inputFile") || xmlElements.get(i - 1)
+								.getName().equals("outputFile")))
+					xmlElementForm.setToDisplay(false);
+				else
+					xmlElementForm.setToDisplay(true);
 			} else {
 				if (i < (xmlElements.size() - 1)) {
 					if (xmlElements.get(i + 1).getLevel() > xmlElements.get(i)

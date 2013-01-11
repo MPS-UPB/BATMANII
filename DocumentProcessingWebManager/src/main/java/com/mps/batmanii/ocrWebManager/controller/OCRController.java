@@ -253,7 +253,9 @@ public class OCRController {
 			List<XmlElement> xmlElementsSaved = xmlFileSaved.getXmlElements();
 			for (XmlElement element : xmlElementsSaved) {
 				logger.info(element.getName() + ":" + element.getValue() + " "
-						+ element.getLevel() + " " + element.getAttribute());
+						+ element.getLevel() + " " + element.getAttribute()
+						+ " min " + element.getMinOccurs() + " max "
+						+ element.getMaxOccurs());
 			}
 		} else {
 			List<XmlFile> existingXmlFiles = selectedXmlFiles.getXmlFiles();
@@ -273,7 +275,9 @@ public class OCRController {
 			List<XmlElement> xmlElementsSaved = xmlFileSaved.getXmlElements();
 			for (XmlElement element : xmlElementsSaved) {
 				logger.info(element.getName() + ":" + element.getValue() + " "
-						+ element.getLevel() + " " + element.getAttribute());
+						+ element.getLevel() + " " + element.getAttribute()
+						+ " min " + element.getMinOccurs() + " max "
+						+ element.getMaxOccurs());
 			}
 		}
 

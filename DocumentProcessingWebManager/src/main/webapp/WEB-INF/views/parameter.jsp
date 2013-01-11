@@ -33,7 +33,12 @@
 		<div class="ic"></div>
 		<div class="main">
 			<div class="wrapper">
-				Insert parameters for executable ${execName}
+				Insert parameters for executable ${execName}.Note that the
+				parameters for components "inputFile name" and "outputFile name" can
+				not be completed because they are automatically set by the
+				program.If an executable presents only this two parameteres, you
+				will not have to complete anything.Just click "Submit" to finish
+				selection.
 				<form:form method="post" action="doSave" modelAttribute="list">
 					<table>
 						<c:forEach items="${list.xmlElements}" var="xmlElement"
@@ -89,7 +94,7 @@
 										</c:forEach>
 									</c:if>
 									<c:if test="${xmlElement.toDisplay == false}">
-										<td colspan="${xmlElement.level}" align="right">${xmlElement.name}</td>
+										<td colspan="${xmlElement.level}" align="center">${xmlElement.name}</td>
 									</c:if>
 								</c:if>
 								<form:hidden path="xmlElements[${s.index}].attribute" />
