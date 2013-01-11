@@ -1,7 +1,11 @@
 package com.mps.batmanii.ocrWebManager.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -280,7 +284,7 @@ public class OCRController {
 						+ element.getMaxOccurs());
 			}
 		}
-
+		sort();
 		return "redirect:/ocr";
 	}
 
@@ -329,4 +333,73 @@ public class OCRController {
 		return "redirect:/ocr";
 	}
 
+	public void sort() {
+		Map<Integer, List<Exec>> mapExecs = new HashMap<Integer, List<Exec>>();
+		Map<Integer, List<XmlFile>> mapXmlFiles = new HashMap<Integer, List<XmlFile>>();
+		for (int i = 1; i <= 7; i++) {
+			mapExecs.put(i, null);
+		}
+		List<Exec> execs = selectedExecs.getSelectedExecs();
+		List<XmlFile> xmlFiles = selectedXmlFiles.getXmlFiles();
+		if (execs.size() > 0) {
+			for (int i = 0; i < execs.size(); i++) {
+				int which = 0;
+				if (execs.get(i).getExecType().equals("preprocessing")) {
+					which = 1;
+				}
+				if (execs.get(i).getExecType().equals("binarization")) {
+					which = 2;
+				}
+				if (execs.get(i).getExecType().equals("layout")) {
+					which = 3;
+				}
+				if (execs.get(i).getExecType().equals("paging")) {
+					which = 4;
+				}
+				if (execs.get(i).getExecType().equals("ocr")) {
+					which = 5;
+				}
+				if (execs.get(i).getExecType().equals("hierarchy")) {
+					which = 6;
+				}
+				if (execs.get(i).getExecType().equals("pdf-exporter")) {
+					which = 7;
+				}
+				List<Exec> list = mapExecs.get(which);
+				if (list == null) {
+					list = new ArrayList<Exec>();
+				}
+				list.add(execs.get(i));
+				mapExecs.put(which, list);
+				List<XmlFile> list1 = mapXmlFiles.get(which);
+				if (list1 == null) {
+					list1 = new ArrayList<XmlFile>();
+				}
+				list1.add(xmlFiles.get(i));
+				mapXmlFiles.put(which, list1);
+			}
+		}
+		List<Exec> newSelectedExecs = new ArrayList<Exec>();
+		Set<Entry<Integer, List<Exec>>> entrySet = mapExecs.entrySet();
+		for (Entry<Integer, List<Exec>> e : entrySet) {
+			List<Exec> value = e.getValue();
+			if (value != null && value.size() > 0) {
+				for (int index = 0; index < value.size(); index++) {
+					newSelectedExecs.add(value.get(index));
+				}
+			}
+		}
+		selectedExecs.setSelectedExecs(newSelectedExecs);
+		List<XmlFile> newSelectedXmlFiles = new ArrayList<XmlFile>();
+		Set<Entry<Integer, List<XmlFile>>> entrySet2 = mapXmlFiles.entrySet();
+		for (Entry<Integer, List<XmlFile>> e : entrySet2) {
+			List<XmlFile> value = e.getValue();
+			if (value != null && value.size() > 0) {
+				for (int index = 0; index < value.size(); index++) {
+					newSelectedXmlFiles.add(value.get(index));
+				}
+			}
+		}
+		selectedXmlFiles.setXmlFiles(newSelectedXmlFiles);
+	}
 }
