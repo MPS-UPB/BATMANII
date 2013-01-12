@@ -31,7 +31,10 @@
 			<div class="wrapper">
 				${propertyHolder.inputSchemasFolder} <a class="button-1" href="#">Proba
 					buton</a>
-			</div>
+					<!--==============================Andrei================================-->
+					<a class="button-1" href="ocr">OCR</a>
+					<!--==============================Andrei================================-->
+			
 		</div>
 		<form:form modelAttribute="uploadItem" method="post" enctype="multipart/form-data" id="item">
              <fieldset>

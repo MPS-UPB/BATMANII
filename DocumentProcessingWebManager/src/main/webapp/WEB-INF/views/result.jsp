@@ -26,7 +26,19 @@
     <section id="content"><div class="ic"></div>
         <div class="main">
             <div class="wrapper">
-    
+            <!--==============================Andrei================================-->
+				<table>
+					<c:forEach var="fileName" items="${list}">
+						<tr>
+							<td><a href="/ocrwebmanager/result/download?fileName=${fileName}">${fileName}</a></td>
+							<!--
+							<td><a href="/ocrwebmanager/result/download?fileName=${fileName}">
+								<input type="button" value="Download"></a></td>
+							-->
+						</tr>
+					</c:forEach>
+				</table>    
+			<!--==============================ANDREI================================-->			
             </div>
         </div>
     </section>

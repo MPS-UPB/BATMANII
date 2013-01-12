@@ -57,6 +57,19 @@ public class XsdContainer {
 		}
 	}
 
+	public void restart()  throws SAXException, IOException{
+		logger.info("In postconstruct XsdContainer");
+		File folder = new File(propertyHolder.getInputSchemasFolder());
+		xsdFiles = new ArrayList<XsdFile>();
+		for (File fileEntry : folder.listFiles()) {
+			logger.info(fileEntry.getAbsolutePath());
+			ParserXsd parserXsd = new ParserXsd();
+			XsdFile xsdFile = parserXsd.parse(fileEntry.getAbsolutePath());
+			xsdFiles.add(xsdFile);
+		}
+	}
+	
+	
 	public List<XsdFile> getXsdFiles() {
 		return xsdFiles;
 	}
