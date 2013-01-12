@@ -16,6 +16,7 @@ import org.springframework.validation.ObjectError;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.ServletConfig;
 import java.io.FileOutputStream;
@@ -123,6 +124,17 @@ public class IndexController {
 		return "index"; 
 	}
 
-	
+	@RequestMapping("/reinitialize")
+	public String reinitialize(Model model, HttpSession session) throws SAXException, IOException {
+		
+
+
+		execContainer.restart();
+		xsdContainer.restart();
+			
+		
+		
+		return "redirect:/";
+	}	
 	
 }
