@@ -32,6 +32,7 @@
 				${propertyHolder.inputSchemasFolder} <a class="button-1" href="#">Proba
 					buton</a>
 					<a class="button-1" href="ocr">OCR</a>
+					<a class="button-1" href="/ocrwebmanager/ocr/reinitialize">Reinitializare</a>
 			</div>
 		</div>
 		<form:form modelAttribute="uploadItem" method="post" enctype="multipart/form-data" id="item">
