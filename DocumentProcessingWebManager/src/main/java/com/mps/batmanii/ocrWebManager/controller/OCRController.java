@@ -335,18 +335,7 @@ public class OCRController {
 		return "redirect:/ocr";
 	}
 	
-	@RequestMapping("/reinitialize")
-	public String reinitialize(Model model, HttpSession session) throws SAXException, IOException {
-		
-
-
-		execContainer.restart();
-		xsdContainer.restart();
-			
-		
-		
-		return "redirect:/ocr";
-	}	
+	
 
 	public void sort() {
 		Map<Integer, List<Exec>> mapExecs = new HashMap<Integer, List<Exec>>();
