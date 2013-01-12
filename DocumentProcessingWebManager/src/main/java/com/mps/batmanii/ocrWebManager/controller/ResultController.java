@@ -85,7 +85,8 @@ public class ResultController {
 	public String display(Model model) 
 	{
 				//redenumeste variabilele sa fie de forma fisiereXml fara "_".
-				List<XmlFile> fisiereXml = selectedXmlFiles.getXmlFiles();
+				List<XmlFile> fisiereXml = new ArrayList<XmlFile>();
+				fisiereXml =selectedXmlFiles.getXmlFiles();
 		        Vector<String> listaFisiere = listFile(propertyHolder.getUploadedImagesFolder());
 		        Vector<String> outputEtapaPrecedenta=new Vector<String>();
 		        int ok=0;
@@ -101,16 +102,13 @@ public class ResultController {
 					}
 					else 
 					{
-						if (fisiereXml.get(index_xml).getExecType().contentEquals("layout") || fisiereXml.get(index_xml).getExecType().contentEquals("paging") || fisiereXml.get(index_xml).getExecType().contentEquals("hierarchy"))
+						if(fisiereXml.get(index_xml).getExecType().contentEquals("pdf-exporter"))
 						{
-							tip=1; //returneaza un xml
+							tip=2; // returneaza pdf						
 						}
 						else
 						{
-							if (fisiereXml.get(index_xml).getExecType().contentEquals("ocr"))
-							{
-								tip=2; //returneaza un txt
-							}
+							tip=1; //returneaza xml
 						}
 					}
 					System.out.println("index_xml= " + index_xml);
@@ -148,6 +146,10 @@ public class ResultController {
 									if(tip == 0)
 									{
 										output = output+listaFisiere.get(fileCounter).substring(listaFisiere.get(fileCounter).lastIndexOf("."));
+									}
+									if(tip == 1)
+									{
+										output = output + ".xml";
 									}
 									fisiereXml
 										.get(index_xml)
@@ -310,10 +312,6 @@ public class ResultController {
 						}
 						else
 						{
-							System.out.println("AICI!!");
-							System.out.println("size  = "+fisiereXml.get(index_xml).getXmlElements().size());
-							for(int fileCounter = 0; fileCounter < outputEtapaPrecedenta.size(); fileCounter++)
-								System.out.println("outputfilePrecedent: "+outputEtapaPrecedenta.get(fileCounter));
 							for (int i = 0; i < fisiereXml.get(index_xml).getXmlElements().size(); i++)
 							{
 								System.out.println("AICI i = "+i);
@@ -323,61 +321,79 @@ public class ResultController {
 									fisiereXml
 									.get(index_xml)
 									.getXmlElements().get(i+1).setValue(outputEtapaPrecedenta.get(0));
-									System.out.println("OF: "+ outputEtapaPrecedenta.get(0));
+									
 									/*pentru fiecare rezultat de la pasul anterior*/
-									for (int k = 0; k < fisiereXml.get(index_xml).getXmlElements().size(); k++)
-									{
-										System.out.println("Testare");
-										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(k).getName()+", "
-										+"name:" + fisiereXml.get(index_xml).getXmlElements().get(k).getValue());
-									}
 									for(int fileCounter = 1; fileCounter < outputEtapaPrecedenta.size(); fileCounter++)
 									{
-										XmlElement nouXmlElem1 = new XmlElement();
-										nouXmlElem1 = fisiereXml
+										XmlElement nouXmlElem1 = new XmlElement(
+												fisiereXml
+													.get(index_xml)
+													.getXmlElements()
+													.get(i).getName(),
+												fisiereXml
+													.get(index_xml)
+													.getXmlElements()
+													.get(i).getValue(),
+												fisiereXml
+													.get(index_xml)
+													.getXmlElements()
+													.get(i).getAttribute(),
+												fisiereXml
+													.get(index_xml)
+													.getXmlElements()
+													.get(i).getLevel(),
+												fisiereXml
+													.get(index_xml)
+													.getXmlElements()
+													.get(i).getSimpleType(),
+											    fisiereXml
+													.get(index_xml)
+													.getXmlElements()
+													.get(i).getMinOccurs(),
+												fisiereXml
+													.get(index_xml)
+													.getXmlElements()
+													.get(i).getMaxOccurs());
+										XmlElement nouXmlElem2 = new XmlElement(
+												fisiereXml
 												.get(index_xml)
 												.getXmlElements()
-												.get(i);
-										XmlElement nouXmlElem2 = new XmlElement();
-										nouXmlElem2 = fisiereXml
+												.get(i+1).getName(),
+											fisiereXml
 												.get(index_xml)
 												.getXmlElements()
-												.get(i + 1);
-										
-										System.out.println("Testarea BEFORE");
-										System.out.println("name:" + nouXmlElem1.getName() + ", "+"name:" + nouXmlElem1.getValue());
-										System.out.println("name:" + nouXmlElem2.getName() + ", "+"name:" + nouXmlElem2.getValue());
-										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i).getName()+", "
-												+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i).getValue());
-										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i+1).getName()+", "
-												+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i+1).getValue());
+												.get(i+1).getValue(),
+											fisiereXml
+												.get(index_xml)
+												.getXmlElements()
+												.get(i+1).getAttribute(),
+											fisiereXml
+												.get(index_xml)
+												.getXmlElements()
+												.get(i+1).getLevel(),
+											fisiereXml
+												.get(index_xml)
+												.getXmlElements()
+												.get(i+1).getSimpleType(),
+										    fisiereXml
+												.get(index_xml)
+												.getXmlElements()
+												.get(i+1).getMinOccurs(),
+											fisiereXml
+												.get(index_xml)
+												.getXmlElements()
+												.get(i+1).getMaxOccurs());
 										
 										nouXmlElem2.setValue(outputEtapaPrecedenta.get(fileCounter));
 										
-										System.out.println("Testarea AFTER");
-										System.out.println("name:" + nouXmlElem1.getName() + ", "+"name:" + nouXmlElem1.getValue());
-										System.out.println("name:" + nouXmlElem2.getName() + ", "+"name:" + nouXmlElem2.getValue());
-										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i).getName()+", "
-												+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i).getValue());
-										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i+1).getName()+", "
-												+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i+1).getValue());
-										fisiereXml
-												.get(index_xml)
-												.getXmlElements()
-												.add(fileCounter+i+1, nouXmlElem1);
 										fisiereXml
 											.get(index_xml)
 											.getXmlElements()
-											.add(fileCounter+i+2, nouXmlElem2);		
-										
-										
-										
-										for (int k = 0; k < fisiereXml.get(index_xml).getXmlElements().size(); k++)
-										{
-											System.out.println("Testare");
-											System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(k).getName()+", "
-											+"name:" + fisiereXml.get(index_xml).getXmlElements().get(k).getValue());
-										}
+											.add(fileCounter + i * fileCounter + 1, nouXmlElem1);
+										fisiereXml
+											.get(index_xml)
+											.getXmlElements()
+											.add(fileCounter + i * fileCounter + 2, nouXmlElem2);										
 									}
 									i=i+(outputEtapaPrecedenta.size()-1)*2+1;
 								}
@@ -414,12 +430,6 @@ public class ResultController {
 								}
 							}
 							
-							for (int i = 0; i < fisiereXml.get(index_xml).getXmlElements().size(); i++)
-							{
-								System.out.println("Testare");
-								System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i).getName()+", "
-								+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i).getValue());
-							}
 							/* creare xml */
 							CreateXml nou = new CreateXml();
 							String newXmlFile=propertyHolder.getXmlFolder()
