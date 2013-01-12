@@ -256,7 +256,8 @@
 			</div>
 			
 			<a class="button-1" href="/ocrwebmanager/result"
-				>Process</a>
+				>Process</a>&nbsp;<a class="button-1" href="/ocrwebmanager/"
+				>Back</a>
 			
 
 		</div>
