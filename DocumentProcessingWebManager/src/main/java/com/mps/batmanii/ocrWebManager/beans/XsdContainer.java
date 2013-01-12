@@ -50,25 +50,35 @@ public class XsdContainer {
 		logger.info("In postconstruct XsdContainer");
 		File folder = new File(propertyHolder.getInputSchemasFolder());
 		for (File fileEntry : folder.listFiles()) {
-			logger.info(fileEntry.getAbsolutePath());
-			ParserXsd parserXsd = new ParserXsd();
-			XsdFile xsdFile = parserXsd.parse(fileEntry.getAbsolutePath());
-			xsdFiles.add(xsdFile);
+			if (fileEntry.getName().contains(".xsd")) {
+				logger.info(fileEntry.getAbsolutePath());
+				ParserXsd parserXsd = new ParserXsd();
+				XsdFile xsdFile = parserXsd.parse(fileEntry.getAbsolutePath());
+				xsdFiles.add(xsdFile);
+			} else {
+				logger.info("Fisierul " + fileEntry.getName()
+						+ " nu este o schema xsd");
+			}
 		}
 	}
 
-	public void restart()  throws SAXException, IOException{
-		logger.info("In postconstruct XsdContainer");
+	public void restart() throws SAXException, IOException {
+		logger.info("In restart XsdContainer");
 		File folder = new File(propertyHolder.getInputSchemasFolder());
 		xsdFiles = new ArrayList<XsdFile>();
 		for (File fileEntry : folder.listFiles()) {
-			logger.info(fileEntry.getAbsolutePath());
-			ParserXsd parserXsd = new ParserXsd();
-			XsdFile xsdFile = parserXsd.parse(fileEntry.getAbsolutePath());
-			xsdFiles.add(xsdFile);
+			if (fileEntry.getName().contains(".xsd")) {
+				logger.info(fileEntry.getAbsolutePath());
+				ParserXsd parserXsd = new ParserXsd();
+				XsdFile xsdFile = parserXsd.parse(fileEntry.getAbsolutePath());
+				xsdFiles.add(xsdFile);
+			} else {
+				logger.info("Fisierul " + fileEntry.getName()
+						+ " nu este o schema xsd");
+			}
 		}
 	}
-	
+
 	public List<XsdFile> getXsdFiles() {
 		return xsdFiles;
 	}
