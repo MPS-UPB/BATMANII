@@ -123,18 +123,6 @@ public class IndexController {
 		return "index"; 
 	}
 
-	@RequestMapping("/reinitialize")
-	public String reinitialize(Model model, 
-			HttpSession session) throws SAXException, IOException {
-		
-
-
-		//execContainer.restart();
-		//xsdContainer.restart();
-			
-		
-		
-		return "redirect:/";
-	}	
+	
 	
 }
