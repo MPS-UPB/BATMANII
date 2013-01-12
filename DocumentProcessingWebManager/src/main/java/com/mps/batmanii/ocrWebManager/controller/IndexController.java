@@ -45,11 +45,12 @@ public class IndexController {
 		model.addAttribute("propertyHolder", propertyHolder);
 		return "index";
 	}*/
-	@Autowired
-	PropertyHolder propertyHolder;
 	
 	@Autowired
 	XsdContainer xsdContainer;
+	
+	@Autowired
+	PropertyHolder propertyHolder;
 	
 	@Autowired
 	ExecContainer execContainer;
@@ -123,17 +124,17 @@ public class IndexController {
 	}
 
 	@RequestMapping("/reinitialize")
-	public String delete(Model model, 
+	public String reinitialize(Model model, 
 			HttpSession session) throws SAXException, IOException {
 		
 
 
-		execContainer.restart();
-		xsdContainer.restart();
+		//execContainer.restart();
+		//xsdContainer.restart();
 			
 		
 		
-		return "redirect:/ocr";
+		return "redirect:/";
 	}	
 	
 }
