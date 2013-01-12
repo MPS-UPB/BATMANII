@@ -254,8 +254,10 @@
 					</tr>
 				</table>
 			</div>
+			<a class="button-1" href="/ocrwebmanager/ocr/reinitialize">Reinitializare</a>
 			<a class="button-1" href="/ocrwebmanager/result"
 				>Process</a>
+			
 
 		</div>
 	</section>
