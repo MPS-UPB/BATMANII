@@ -1,5 +1,6 @@
 package com.mps.batmanii.ocrWebManager.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.xml.sax.SAXException;
 
 import com.mps.batmanii.ocrWebManager.beans.Exec;
 import com.mps.batmanii.ocrWebManager.beans.ExecContainer;
@@ -332,6 +334,19 @@ public class OCRController {
 
 		return "redirect:/ocr";
 	}
+	
+	@RequestMapping("/reinitialize")
+	public String reinitialize(Model model, HttpSession session) throws SAXException, IOException {
+		
+
+
+		execContainer.restart();
+		xsdContainer.restart();
+			
+		
+		
+		return "redirect:/ocr";
+	}	
 
 	public void sort() {
 		Map<Integer, List<Exec>> mapExecs = new HashMap<Integer, List<Exec>>();
