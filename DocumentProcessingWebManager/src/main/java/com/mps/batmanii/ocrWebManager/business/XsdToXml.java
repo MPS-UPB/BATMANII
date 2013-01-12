@@ -19,7 +19,9 @@ import com.mps.batmanii.ocrWebManager.beans.XsdFile;
 
 /**
  * 
- * @author comy & bersy am stabilit impreuna structura claselor
+ * @author comy & bersy am stabilit impreuna structura claselor Clasa ce contine
+ *         metode folosite pentru a crea obiecte de tipul XmlFile din obiecte
+ *         XsdFile, precum si XmlElementForm din XmlElement si invers
  * 
  */
 public class XsdToXml {
@@ -49,10 +51,7 @@ public class XsdToXml {
 			execParameter.setName(attributeType.getName());
 			execParameter.setSimpleType(null);
 			execParameter.setAttribute(true);
-			// logger.info (attributeType.getType().getName());
-			// logger.info (xsdFile.getSimpleTypes().toString());
 			for (SimpleType simpleType : xsdFile.getSimpleTypes()) {
-
 				if (simpleType.getName().compareTo(
 						attributeType.getType().getName()) == 0) {
 					execParameter.setSimpleType(simpleType);
@@ -99,14 +98,17 @@ public class XsdToXml {
 
 	}
 
-	// ToDo pt Bersy
-	// Primeste ca parametru un obiect XsdFile si imi intoarce un obiect XmlFile
+	/**
+	 * Primeste ca parametru un obiect de tipul XsdFile si intoarce un obiect
+	 * XmlFile
+	 * 
+	 * @param xsdFile
+	 * @return
+	 */
 	public XmlFile getXmlFileFromXsdFile(XsdFile xsdFile) {
 		XmlFile xmlFile = new XmlFile();
 		ArrayList<SimpleType> listSimpleType = new ArrayList<SimpleType>(
 				xsdFile.getSimpleTypes());
-		// LinkedList<SimpleType>listSimpleType = (LinkedList<SimpleType>)
-		// xsdFile.getSimpleTypes();
 		for (int i = 0; i < listSimpleType.size(); i++) {
 			if (listSimpleType.get(i).getName().compareTo("execName") == 0) {
 				xmlFile.setExecName(listSimpleType.get(i).getPattern());
@@ -136,8 +138,10 @@ public class XsdToXml {
 	/**
 	 * Metoda care cauta in lista de obiecte XsdFile din XsdContainer dupa
 	 * execName si sa imi intoarca obiectul de tip XsdFile
+	 * 
+	 * @param execName
+	 * @return
 	 */
-	// ToDo Bersy
 	public XsdFile getXsdFileByExecName(String execName) {
 		ArrayList<XsdFile> listXsdFiles = new ArrayList<XsdFile>(
 				xsdContainer.getXsdFiles());
@@ -169,8 +173,13 @@ public class XsdToXml {
 
 	}
 
-	// ToDo Bersy
-	// SA adaugi minOccurs si maxOccurs
+	/**
+	 * Construieste lista de obiecte XmlElements din obiectul XmlFile primit ca
+	 * parametru
+	 * 
+	 * @param xmlFile
+	 * @return
+	 */
 	public List<XmlElement> getXmlElements(XmlFile xmlFile) {
 
 		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();
@@ -184,7 +193,7 @@ public class XsdToXml {
 	}
 
 	/**
-	 * Din lista de xml elements creaza lista de de xmlelementsform
+	 * Din lista de xmlelements creaza lista de de xmlelementsform
 	 * 
 	 * @param xmlElements
 	 * @return
@@ -221,6 +230,12 @@ public class XsdToXml {
 		return xmlElementForms;
 	}
 
+	/**
+	 * Creaza un obiect XmlElementForm dintr-un obiect XmlElement
+	 * 
+	 * @param element
+	 * @return
+	 */
 	public XmlElementForm createFormFromElement(XmlElement element) {
 		XmlElementForm xmlElementForm = new XmlElementForm();
 		xmlElementForm.setName(element.getName());
@@ -241,17 +256,25 @@ public class XsdToXml {
 	}
 
 	/**
-	 * din lista de xmlelementsform creaza lista de xml elements
+	 * Din lista de xmlelementsform creaza lista de xml elements
+	 * 
+	 * @param forms
+	 * @return
 	 */
 	public List<XmlElement> createXmlElements(List<XmlElementForm> forms) {
 		List<XmlElement> xmlElements = new ArrayList<XmlElement>();
 		for (int i = 0; i < forms.size(); i++) {
-			// logger.info(i + "");
 			xmlElements.add(createElementFromForm(forms.get(i)));
 		}
 		return xmlElements;
 	}
 
+	/**
+	 * Creaza un obiect XmlElement dintr-un obiect XmlElementForm
+	 * 
+	 * @param form
+	 * @return
+	 */
 	public XmlElement createElementFromForm(XmlElementForm form) {
 		XmlElement element = new XmlElement();
 		element.setName(form.getName());
@@ -267,6 +290,13 @@ public class XsdToXml {
 		return element;
 	}
 
+	/**
+	 * Cauta un obiect XmlFile dupa execName intr-o lista de astfel de obiecte
+	 * 
+	 * @param execName
+	 * @param files
+	 * @return
+	 */
 	public XmlFile getXmlFileFromList(String execName, List<XmlFile> files) {
 		logger.info(execName + " " + files.size());
 		for (XmlFile file : files) {

@@ -10,9 +10,9 @@ import com.mps.batmanii.ocrWebManager.beans.PropertyHolder;
 import com.mps.batmanii.ocrWebManager.beans.XsdContainer;
 
 import com.mps.batmanii.ocrWebManager.beans.UploadItem;
-import org.springframework.web.bind.annotation.RequestMethod; 
-import org.springframework.validation.BindingResult; 
-import org.springframework.validation.ObjectError; 
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +24,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import javax.servlet.http.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
@@ -32,30 +31,22 @@ import org.xml.sax.SAXException;
  * Clasa controller pentru pagina "index.jsp"
  * 
  * @author Flavia
- * 
+ * @author Andrei
+ * @author Cosmin
  */
 
 @Controller
 @RequestMapping(value = "")
 public class IndexController {
-/*
-	@RequestMapping(value = "/")
-	public String displayIndexPage(Model model) {
-		PropertyHolder propertyHolder = PropertyHolderFactory
-				.getPropertyHolder();
-		model.addAttribute("propertyHolder", propertyHolder);
-		return "index";
-	}*/
-	
+
 	@Autowired
 	XsdContainer xsdContainer;
-	
+
 	@Autowired
 	PropertyHolder propertyHolder;
-	
+
 	@Autowired
 	ExecContainer execContainer;
-
 
 	private String uploadFolderPath;
 	ServletConfig config;
@@ -67,30 +58,29 @@ public class IndexController {
 	public void setUploadFolderPath(String uploadFolderPath) {
 		this.uploadFolderPath = uploadFolderPath;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET) 
-	public String displayFileUploadFormPage(Model model)
-	{
-		model.addAttribute(new UploadItem()); 
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String displayFileUploadFormPage(Model model) {
+		model.addAttribute(new UploadItem());
 		return "index";
 	}
-	
-	@RequestMapping(method = RequestMethod.POST)   
-	public String create(UploadItem uploadItem, BindingResult result, HttpServletRequest request, HttpServletResponse response,
-			HttpSession session)  
-	{     
-		if (result.hasErrors())     
-		{       
-			for(ObjectError error : result.getAllErrors())       
-			{         
-				System.err.println("Error: " + error.getCode() +  " - " + error.getDefaultMessage());       
-			}       
-			return "index";     
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(UploadItem uploadItem, BindingResult result,
+			HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
+		if (result.hasErrors()) {
+			for (ObjectError error : result.getAllErrors()) {
+				System.err.println("Error: " + error.getCode() + " - "
+						+ error.getDefaultMessage());
+			}
+			return "index";
 		}
-		
+
 		System.err.println("-------------------------------------------");
-		System.err.println("Test upload: " + uploadItem.getFileData().getOriginalFilename());
-		System.err.println("-------------------------------------------");      
+		System.err.println("Test upload: "
+				+ uploadItem.getFileData().getOriginalFilename());
+		System.err.println("-------------------------------------------");
 		try {
 			MultipartFile file = uploadItem.getFileData();
 			String fileName = null;
@@ -103,7 +93,8 @@ public class IndexController {
 					return "index";
 				}
 				System.out.println("size::" + file.getSize());
-				fileName = propertyHolder.getUploadedImagesFolder() + file.getOriginalFilename();
+				fileName = propertyHolder.getUploadedImagesFolder()
+						+ file.getOriginalFilename();
 				outputStream = new FileOutputStream(fileName);
 				System.out.println("fileName:" + file.getOriginalFilename());
 
@@ -121,20 +112,17 @@ public class IndexController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "index"; 
+		return "index";
 	}
 
 	@RequestMapping("/reinitialize")
-	public String reinitialize(Model model, HttpSession session) throws SAXException, IOException {
-		
-
+	public String reinitialize(Model model, HttpSession session)
+			throws SAXException, IOException {
 
 		execContainer.restart();
 		xsdContainer.restart();
-			
-		
-		
+
 		return "redirect:/";
-	}	
-	
+	}
+
 }

@@ -1,6 +1,5 @@
 package com.mps.batmanii.ocrWebManager.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.xml.sax.SAXException;
-
 import com.mps.batmanii.ocrWebManager.beans.Exec;
 import com.mps.batmanii.ocrWebManager.beans.ExecContainer;
 import com.mps.batmanii.ocrWebManager.beans.PropertyHolder;
@@ -34,7 +31,8 @@ import com.mps.batmanii.ocrWebManager.beans.XsdFile;
 import com.mps.batmanii.ocrWebManager.business.XsdToXml;
 
 /**
- * Clasa controller pentru pagina "ocr.jsp"
+ * Clasa controller pentru pagina "ocr.jsp" si "parameter.jsp", paginile ce
+ * afiseaza selectia executabilelor si completarea parametrilor
  * 
  * @author CosminV
  * 
@@ -153,7 +151,7 @@ public class OCRController {
 					+ " este selectat pentru prima data");
 			XsdFile xsdFile = xsdToXml.getXsdFileByExecName(execName
 					.concat(".exe"));
-			// Se creaza un obiect de tipul XmlFile din obiectul XsdFile
+			/* Se creaza un obiect de tipul XmlFile din obiectul XsdFile */
 			xmlFile = xsdToXml.getXmlFileFromXsdFile(xsdFile);
 			xmlFile.setExecName(exec.getExecName());
 			xmlFile.setAllExecTypes(exec.getAllExecTypes());
@@ -165,7 +163,7 @@ public class OCRController {
 			logger.info(element.getName() + " " + element.getValue() + " "
 					+ element.getAttribute() + " " + element.getLevel());
 		}
-		// din lista de xmlelements se construieste o lista de xmlelementsform
+		/* din lista de xmlelements se construieste o lista de xmlelementsform */
 		List<XmlElementForm> createXmlElementForms = xsdToXml
 				.createXmlElementForms(xmlElements);
 		XmlElementFormList xmlElementFormList = new XmlElementFormList(
@@ -176,8 +174,10 @@ public class OCRController {
 					+ form.getLevel() + " " + form.getToDisplay());
 		}
 
-		// Se pune pe model un obiect de tipul xmlElementFormList, construit
-		// din lista obtinuta mai sus si numele executabilului
+		/*
+		 * Se pune pe model un obiect de tipul xmlElementFormList, construit din
+		 * lista obtinuta mai sus si numele executabilului
+		 */
 		session.setAttribute("execName", execName);
 		session.setAttribute("execType", execType);
 		model.addAttribute("execName", execName);
@@ -186,11 +186,19 @@ public class OCRController {
 		return "parameter";
 	}
 
+	/**
+	 * Metoda care salveaza parametrii introdusi in interfata
+	 * 
+	 * @param formList
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/doSave")
 	public String save(XmlElementFormList formList, Model model,
 			HttpSession session) {
 		logger.info("Salvare");
-		// primesc obiectele
+		/* primesc obiectele */
 		String execName = (String) session.getAttribute("execName");
 		String execType = (String) session.getAttribute("execType");
 		logger.info("De pe sesiune:" + execName + " " + execType);
@@ -226,7 +234,7 @@ public class OCRController {
 			selectedExecs.setSelectedExecs(alreadySelectedExecs);
 			XsdFile xsdFile = xsdToXml.getXsdFileByExecName(execName
 					.concat(".exe"));
-			// Se creaza un obiect de tipul XmlFile din obiectul XsdFile
+			/* Se creaza un obiect de tipul XmlFile din obiectul XsdFile */
 			xmlFile = xsdToXml.getXmlFileFromXsdFile(xsdFile);
 			xmlFile.setExecType(exec.getExecType());
 			xmlFile.setAllExecTypes(exec.getAllExecTypes());
@@ -290,6 +298,14 @@ public class OCRController {
 		return "redirect:/ocr";
 	}
 
+	/**
+	 * Metoda care anuleaza selectia unui executabil
+	 * 
+	 * @param execName
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/cancel")
 	public String cancel(String execName, Model model, HttpSession session) {
 		logger.info("Cancel " + execName);
@@ -301,6 +317,15 @@ public class OCRController {
 		return "redirect:/ocr";
 	}
 
+	/**
+	 * Metoda care sterge un executabil din cele deja selectate
+	 * 
+	 * @param execName
+	 * @param execType
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/delete")
 	public String delete(String execName, String execType, Model model,
 			HttpSession session) {
@@ -334,9 +359,11 @@ public class OCRController {
 
 		return "redirect:/ocr";
 	}
-	
-	
 
+	/**
+	 * Metoda care sorteaza listele de executabile fisierexml selectate in
+	 * ordinea tipurilor(execType)
+	 */
 	public void sort() {
 		Map<Integer, List<Exec>> mapExecs = new HashMap<Integer, List<Exec>>();
 		Map<Integer, List<XmlFile>> mapXmlFiles = new HashMap<Integer, List<XmlFile>>();
