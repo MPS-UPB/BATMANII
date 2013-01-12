@@ -61,7 +61,6 @@ public class ResultController {
 	/* functie care returneaza lista de fisiere din folderul specificat de path*/
 	public Vector<String> listFile(String path)
 	{
-		String file;
 		Vector<String> folderFiles= new Vector<String>() ;
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles(); 
@@ -70,11 +69,7 @@ public class ResultController {
 		{
 			if (listOfFiles[i].isFile()) 
 			{
-				file = listOfFiles[i].getName();
-				if (file.endsWith(".tif") || file.endsWith(".TIF"))
-				{
-					folderFiles.add(file);
-				}
+				folderFiles.add(listOfFiles[i].getName());	
 			}
 		}
 		return folderFiles;
