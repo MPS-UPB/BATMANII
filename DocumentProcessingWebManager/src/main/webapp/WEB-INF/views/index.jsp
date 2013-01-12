@@ -31,6 +31,7 @@
 			<div class="wrapper">
 				${propertyHolder.inputSchemasFolder} <a class="button-1" href="#">Proba
 					buton</a>
+					<a class="button-1" href="/ocrwebmanager/reinitialize">Reinitializare</a>
 					<a class="button-1" href="ocr">OCR</a>
 			</div>
 		</div>
