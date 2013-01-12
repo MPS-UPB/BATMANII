@@ -206,20 +206,21 @@ public class ResultController {
 					{
 						for (int i = 0; i < fisiereXml.get(index_xml).getXmlElements().size(); i++)
 						{
-							if (fisiereXml.get(index_xml).getXmlElements().get(i)
-								.getName().equals("inputFile") && fisiereXml.get(index_xml).getXmlElements().get(i)
-								.getMaxOccurs() != -1 )
+							if (fisiereXml.get(index_xml).getXmlElements().get(i).getName().equals("inputFile")) 
 							{
-								ok=1;
-								break;
-							}
-							else
-							{
-								ok = 1;
+								if( fisiereXml.get(index_xml).getXmlElements().get(i).getMaxOccurs() != -1 )
+								{
+									ok=1;
+									break;
+								}
+								else
+								{
+									ok = 0;
+								}
 							}
 						}
-						System.out.println("ok = "+ok);
-						if(ok != -1)
+						System.out.println("ok = " + ok);
+						if(ok == 1)
 						{					
 							/*pentru fiecare rezultat de la pasul anterior*/
 							for(int fileCounter = 0; fileCounter < outputEtapaPrecedenta.size(); fileCounter++)
@@ -314,35 +315,75 @@ public class ResultController {
 						else
 						{
 							System.out.println("AICI!!");
+							System.out.println("size  = "+fisiereXml.get(index_xml).getXmlElements().size());
+							for(int fileCounter = 0; fileCounter < outputEtapaPrecedenta.size(); fileCounter++)
+								System.out.println("outputfilePrecedent: "+outputEtapaPrecedenta.get(fileCounter));
 							for (int i = 0; i < fisiereXml.get(index_xml).getXmlElements().size(); i++)
 							{
+								System.out.println("AICI i = "+i);
 								if (fisiereXml.get(index_xml).getXmlElements().get(i)
 										.getName().equals("inputFile"))
 								{
-									XmlElement nouXmlElem1= fisiereXml
-											.get(index_xml)
-											.getXmlElements()
-											.get(i);
-									XmlElement nouXmlElem2= fisiereXml
-											.get(index_xml)
-											.getXmlElements()
-											.get(i + 1);
+									fisiereXml
+									.get(index_xml)
+									.getXmlElements().get(i+1).setValue(outputEtapaPrecedenta.get(0));
+									System.out.println("OF: "+ outputEtapaPrecedenta.get(0));
 									/*pentru fiecare rezultat de la pasul anterior*/
-									for(int fileCounter = 0; fileCounter < outputEtapaPrecedenta.size(); fileCounter++)
+									for (int k = 0; k < fisiereXml.get(index_xml).getXmlElements().size(); k++)
 									{
-										nouXmlElem2.setValue(outputEtapaPrecedenta.get(fileCounter));
-										if(fileCounter != 0)
-										{	
-											fisiereXml
+										System.out.println("Testare");
+										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(k).getName()+", "
+										+"name:" + fisiereXml.get(index_xml).getXmlElements().get(k).getValue());
+									}
+									for(int fileCounter = 1; fileCounter < outputEtapaPrecedenta.size(); fileCounter++)
+									{
+										XmlElement nouXmlElem1 = new XmlElement();
+										nouXmlElem1 = fisiereXml
 												.get(index_xml)
 												.getXmlElements()
-												.add(fileCounter+i, nouXmlElem1);
-										}
+												.get(i);
+										XmlElement nouXmlElem2 = new XmlElement();
+										nouXmlElem2 = fisiereXml
+												.get(index_xml)
+												.getXmlElements()
+												.get(i + 1);
+										
+										System.out.println("Testarea BEFORE");
+										System.out.println("name:" + nouXmlElem1.getName() + ", "+"name:" + nouXmlElem1.getValue());
+										System.out.println("name:" + nouXmlElem2.getName() + ", "+"name:" + nouXmlElem2.getValue());
+										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i).getName()+", "
+												+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i).getValue());
+										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i+1).getName()+", "
+												+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i+1).getValue());
+										
+										nouXmlElem2.setValue(outputEtapaPrecedenta.get(fileCounter));
+										
+										System.out.println("Testarea AFTER");
+										System.out.println("name:" + nouXmlElem1.getName() + ", "+"name:" + nouXmlElem1.getValue());
+										System.out.println("name:" + nouXmlElem2.getName() + ", "+"name:" + nouXmlElem2.getValue());
+										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i).getName()+", "
+												+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i).getValue());
+										System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i+1).getName()+", "
+												+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i+1).getValue());
+										fisiereXml
+												.get(index_xml)
+												.getXmlElements()
+												.add(fileCounter+i+1, nouXmlElem1);
 										fisiereXml
 											.get(index_xml)
 											.getXmlElements()
-											.add(fileCounter+i+1, nouXmlElem2);
+											.add(fileCounter+i+2, nouXmlElem2);		
+										
+										
+										
+										for (int k = 0; k < fisiereXml.get(index_xml).getXmlElements().size(); k++)
+										{
+											System.out.println("Testare");
+											System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(k).getName()+", "
+											+"name:" + fisiereXml.get(index_xml).getXmlElements().get(k).getValue());
+										}
 									}
+									i=i+(outputEtapaPrecedenta.size()-1)*2+1;
 								}
 								if (fisiereXml.get(index_xml).getXmlElements().get(i)
 										.getName().equals("outputFile"))
@@ -379,6 +420,13 @@ public class ResultController {
 									break;
 								}
 							}
+							
+							for (int i = 0; i < fisiereXml.get(index_xml).getXmlElements().size(); i++)
+							{
+								System.out.println("Testare");
+								System.out.println("name:" +fisiereXml.get(index_xml).getXmlElements().get(i).getName()+", "
+								+"name:" + fisiereXml.get(index_xml).getXmlElements().get(i).getValue());
+							}
 							/* creare xml */
 							CreateXml nou = new CreateXml();
 							String newXmlFile=propertyHolder.getXmlFolder()
@@ -391,7 +439,7 @@ public class ResultController {
 										.substring(
 												0,
 												fisiereXml.get(index_xml)
-														.getExecName().indexOf('.')) + "_" + ".xml";
+														.getExecName().indexOf('.')) +".xml";
 							nou.generateXml(newXmlFile, fisiereXml.get(index_xml).getXmlElements());
 
 							/* rularea executabilului */

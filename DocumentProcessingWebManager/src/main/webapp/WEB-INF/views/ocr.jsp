@@ -255,7 +255,7 @@
 				</table>
 			</div>
 			<a class="button-1" href="/ocrwebmanager/result"
-				onclick="return verifySubmit();">Process</a>
+				>Process</a>
 
 		</div>
 	</section>
