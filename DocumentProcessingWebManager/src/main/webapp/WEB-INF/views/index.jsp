@@ -28,25 +28,55 @@
 	<section id="content">
 		<div class="ic"></div>
 		<div class="main">
-			<div class="wrapper">
-				${propertyHolder.inputSchemasFolder} <a class="button-1" href="#">Proba
-					buton</a>
-					<a class="button-1" href="/ocrwebmanager/reinitialize">Reinitializare</a>
-					<a class="button-1" href="ocr">OCR</a>
-			</div>
+			<div class="wrapper"></div>
 		</div>
-		<form:form modelAttribute="uploadItem" method="post" enctype="multipart/form-data" id="item">
-             <fieldset>
-					<p>
-						<form:label for="fileData" path="fileData">Upload Files</form:label><br/> 
-						<form:input path="fileData" type="file"/>             
-					</p>
-					
-					<p>
-						<input type="submit" value="Upload" />
-					</p>               
-			</fieldset>         
-		</form:form> 
+		<div>
+			<form:form modelAttribute="uploadItem" method="post"
+				enctype="multipart/form-data" id="item">
+				<table>
+					<tr>
+						<td><form:label for="fileData" path="fileData">
+								<h3>Upload Images for processing</h3>
+							</form:label></td>
+					</tr>
+					<tr>
+						<td><br /></td>
+					</tr>
+					<tr>
+						<td><form:input path="fileData" type="file" /></td>
+					</tr>
+					<tr>
+						<td><br /></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="left"><input type="submit"
+							value="Upload" /></td>
+
+					</tr>
+					<tr>
+						<td><br /></td>
+					</tr>
+					<tr>
+						<td><a class="button-1" href="ocr">Proceed to selecting
+								executables</a></td>
+					</tr>
+				</table>
+			</form:form>
+		</div>
+		<div>
+			<table>
+				<tr>
+					<td><br /> <br /> <br /></td>
+				</tr>
+
+				<tr>
+					<td><h3>In case you have added new executables or .xsd
+							files after the server startup, click this button for changes to
+							be visible</h3></td>
+					<td><a class="button-1" href="/ocrwebmanager/reinitialize">Reinitialize</a></td>
+				</tr>
+			</table>
+		</div>
 	</section>
 
 	<%@ include file="/WEB-INF/views/footer.jsp"%>
