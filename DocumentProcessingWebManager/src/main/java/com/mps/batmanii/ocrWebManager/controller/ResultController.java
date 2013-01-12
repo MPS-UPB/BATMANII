@@ -240,7 +240,7 @@ public class ResultController {
 									if (fisiereXml.get(index_xml).getXmlElements().get(i)
 											.getName().equals("outputFile"))
 									{
-										String output=listaFisiere.get(fileCounter).substring(0, listaFisiere.get(fileCounter).indexOf("."))+"_"+fisiereXml
+										String output=propertyHolder.getResults() + listaFisiere.get(fileCounter).substring(0, listaFisiere.get(fileCounter).indexOf("."))+"_"+fisiereXml
 											.get(index_xml).getExecType()+"_"+fisiereXml
 											.get(index_xml)
 											.getExecName()
@@ -250,16 +250,12 @@ public class ResultController {
 															.getExecName().indexOf('.'))+"_"+"output";
 										if(tip == 0)
 										{
-											output=propertyHolder.getResults() + output+"."+listaFisiere.get(fileCounter).substring(listaFisiere.get(fileCounter).lastIndexOf("."));
+											output = output+"."+listaFisiere.get(fileCounter).substring(listaFisiere.get(fileCounter).lastIndexOf("."));
 										}
 										if(tip == 1)
 										{
-											output=propertyHolder.getXmlFolder() + output + ".xml";
-										}
-										if(tip == 2)
-										{
-											output=propertyHolder.getResults() + output;
-										}										
+											output = output + ".xml";
+										}									
 										fisiereXml
 											.get(index_xml)
 											.getXmlElements()
@@ -388,7 +384,7 @@ public class ResultController {
 								if (fisiereXml.get(index_xml).getXmlElements().get(i)
 										.getName().equals("outputFile"))
 								{
-									String output = fisiereXml
+									String output = propertyHolder.getResults() + fisiereXml
 														.get(index_xml).getExecType()
 														+"_"
 														+fisiereXml.
@@ -402,13 +398,10 @@ public class ResultController {
 																			.indexOf('.'))
 														+"_"
 														+"output";
-									/*if(tip == 0)
-									{TODO daca maxOccurs =! -1 la exec de tip binarization
-										output=propertyHolder.getResults() + output+"."+listaFisiere.get(fileCounter).substring(listaFisiere.get(fileCounter).lastIndexOf("."));
-									}*/
+									
 									if(tip == 1)
 									{
-										output=propertyHolder.getXmlFolder() + output + ".xml";
+										output = output + ".xml";
 									}
 									fisiereXml
 										.get(index_xml)
