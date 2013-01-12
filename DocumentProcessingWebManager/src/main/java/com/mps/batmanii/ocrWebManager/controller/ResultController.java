@@ -1,12 +1,21 @@
 package com.mps.batmanii.ocrWebManager.controller;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
+
+import javax.activation.MimetypesFileTypeMap;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -468,10 +477,55 @@ public class ResultController {
 					}
 				}	
 
+				List<String> results = new ArrayList<String>();
+				File[] files = new File(propertyHolder.getResults()).listFiles();
+
+				for (File file : files) {
+				    if (file.isFile()) {
+				        results.add(file.getName());
+				    }
+				}
+				model.addAttribute("list", results);
+				
+				
 				selectedXmlFiles.setXmlFiles(new ArrayList<XmlFile>());
 				selectedExecs.setSelectedExecs(new ArrayList<Exec>());
 			
 				return "result";
 	}
+	
+	@RequestMapping(value = "/download")
+	public String download(String fileName, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		try {
+			//cauti fisierul dupa nume in folder si il pui pentru download pe 
+			//obiectul response
+			//mai jos e un exemplu si asta iti downloadeaza automat
+			MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
+			File file = new File(propertyHolder.getResults()+"\\"+fileName);
+			
+			
+			response.setContentType(mimeTypesMap.getContentType(file));
+	        response.setContentLength((int)file.length());
+	        response.setHeader("Content-Disposition","attachment; filename=\"" + file.getName() +"\"");
+			
+			ServletOutputStream outputStream = response.getOutputStream();
+			DataInputStream in = new DataInputStream(new FileInputStream(file));
+			int length = 0;
+			byte[] bbuf = new byte[100];
+			while ((in != null) && ((length = in.read(bbuf)) != -1)) {
+				outputStream.write(bbuf, 0, length);
+			}
+			in.close();
+			outputStream.flush();
+			outputStream.close();
+			response.flushBuffer();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	
 
 }
