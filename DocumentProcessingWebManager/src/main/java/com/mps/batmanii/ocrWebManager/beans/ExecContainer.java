@@ -55,6 +55,19 @@ public class ExecContainer {
 		}
 	}
 
+	public void restart() {
+		logger.info("In postconstruct ExecContainer");
+		File folder = new File(propertyHolder.getExecsFolder());
+		execs = new ArrayList<Exec>();
+		
+		for (File fileEntry : folder.listFiles()) {
+			Exec exec = new Exec(fileEntry.getName());
+			exec.setExecType(getExecTypeByExecName(fileEntry.getName()));
+			logger.info(exec.getExecName() + " " + exec.getExecType());
+			execs.add(exec);
+		}
+	}
+	
 	public List<Exec> getExecs() {
 		return execs;
 	}
