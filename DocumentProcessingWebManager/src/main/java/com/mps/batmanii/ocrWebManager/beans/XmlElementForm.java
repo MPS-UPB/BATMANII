@@ -2,6 +2,13 @@ package com.mps.batmanii.ocrWebManager.beans;
 
 import java.util.Vector;
 
+/**
+ * Clasa bean pentru a afisa in interfata informatiile din clasa XmlElement,
+ * plus alte informatii suplimentare
+ * 
+ * @author comy
+ * 
+ */
 public class XmlElementForm {
 	private String name;
 	private String value;

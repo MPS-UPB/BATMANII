@@ -3,35 +3,33 @@ package com.mps.batmanii.ocrWebManager.beans;
 import java.util.List;
 
 /**
+ * Clasa bean pentru a retine informatiile in mod recursiv ce se vor regasi
+ * intr-un fisier xml
  * 
- * @author comy & bersy am stabilit impreuna structura claselor
- * 
+ * @author comy
+ * @author bersy
  */
 public class ExecParameter {
 	private String name;
 	private String value;
 	private int minOccurs;
 	private int maxOccurs;
-	private boolean isAttribute =false ;
+	private boolean isAttribute = false;
 
-
-	private int level;// rootElement are nivelul 0, iar apoi nivelul creste
-	private List<ExecParameter> execParameters;// copii sau null in caz ca nu
-												// mai are
+	private int level;/* rootElement are nivelul 0, iar apoi nivelul creste */
+	private List<ExecParameter> execParameters;/*
+												 * copii sau null in caz ca nu
+												 * mai are
+												 */
 	private SimpleType simpleType;
-
 
 	public boolean isAttribute() {
 		return isAttribute;
 	}
 
-
-
 	public void setAttribute(boolean isAttribute) {
 		this.isAttribute = isAttribute;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -42,8 +40,6 @@ public class ExecParameter {
 				+ simpleType + "]";
 	}
 
-
-	
 	public SimpleType getSimpleType() {
 		return simpleType;
 	}

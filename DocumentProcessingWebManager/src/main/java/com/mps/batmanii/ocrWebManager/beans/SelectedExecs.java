@@ -6,11 +6,18 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Clasa bean ce contine o lista cu executabilele selectate de utilizator in
+ * interfata
+ * 
+ * @author comy
+ * 
+ */
 public class SelectedExecs {
 
 	private final static Logger logger = LoggerFactory
 			.getLogger(SelectedExecs.class);
-	
+
 	private List<Exec> selectedExecs;
 
 	public SelectedExecs() {

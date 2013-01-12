@@ -2,6 +2,12 @@ package com.mps.batmanii.ocrWebManager.beans;
 
 import java.util.List;
 
+/**
+ * Clasa bean folosita in interfata pentru a afisa date
+ * 
+ * @author comy
+ * 
+ */
 public class XmlElementFormList {
 
 	private List<XmlElementForm> xmlElements;

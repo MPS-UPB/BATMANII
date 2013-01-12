@@ -3,8 +3,10 @@ package com.mps.batmanii.ocrWebManager.beans;
 import java.util.List;
 
 /**
+ * Clasa bean care retine informatiile despre un fisier xml
  * 
- * @author comy & bersy am stabilit impreuna structura claselor
+ * @author comy
+ * @author bersy
  * 
  */
 public class XmlFile {

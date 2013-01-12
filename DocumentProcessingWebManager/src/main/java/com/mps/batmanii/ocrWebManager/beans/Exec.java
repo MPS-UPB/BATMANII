@@ -2,6 +2,12 @@ package com.mps.batmanii.ocrWebManager.beans;
 
 import java.util.List;
 
+/**
+ * Clasa bean pentru a retine informatiile despre un executabil
+ * 
+ * @author comy
+ * 
+ */
 public class Exec {
 
 	private String execName;

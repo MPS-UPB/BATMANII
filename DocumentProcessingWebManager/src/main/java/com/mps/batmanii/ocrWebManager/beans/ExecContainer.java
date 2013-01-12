@@ -10,6 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * Clasa ce retine o lista cu executabilele ce se regasesc in folderul
+ * corespunzator
+ * 
+ * @author comy
+ * 
+ */
 public class ExecContainer {
 	private final static Logger logger = LoggerFactory
 			.getLogger(ExecContainer.class);
@@ -27,6 +34,13 @@ public class ExecContainer {
 		execs = new ArrayList<Exec>();
 	}
 
+	/**
+	 * 
+	 * Metoda apelata dupa construirea obiectului; citeste fisierele .exe din
+	 * directorul de executabile, construieste obiecte de tip Exec si le adauga
+	 * pe toate acestea in lista execs
+	 * 
+	 */
 	@PostConstruct
 	public void postConstruct() {
 		logger.info("In postconstruct ExecContainer");
@@ -56,7 +70,7 @@ public class ExecContainer {
 	}
 
 	public void restart() {
-		logger.info("In postconstruct ExecContainer");
+		logger.info("In restart ExecContainer");
 		execs = new ArrayList<Exec>();
 		File folder = new File(propertyHolder.getExecsFolder());
 		for (File fileEntry : folder.listFiles()) {
@@ -81,7 +95,7 @@ public class ExecContainer {
 			}
 		}
 	}
-	
+
 	public List<Exec> getExecs() {
 		return execs;
 	}

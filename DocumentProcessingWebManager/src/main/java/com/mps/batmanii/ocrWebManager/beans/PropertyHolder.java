@@ -2,10 +2,11 @@ package com.mps.batmanii.ocrWebManager.beans;
 
 /**
  * Bean class in care sunt retinute folderele folosite de aplicatie, pentru
- * schemele de input\output, executabile si imagini uploadate
+ * schemele de input\output, executabile, imagini uploadate, fisiere xml de
+ * input si rezultate
  * 
  * @author CosminV
- * 
+ * @author Flavia
  */
 public class PropertyHolder {
 
@@ -50,7 +51,7 @@ public class PropertyHolder {
 	public void setExecsFolder(String execsFolder) {
 		this.execsFolder = execsFolder;
 	}
-	
+
 	public String getXmlFolder() {
 		return xmlFolder;
 	}
