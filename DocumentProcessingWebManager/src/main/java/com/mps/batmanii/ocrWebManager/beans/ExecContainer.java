@@ -57,14 +57,28 @@ public class ExecContainer {
 
 	public void restart() {
 		logger.info("In postconstruct ExecContainer");
-		File folder = new File(propertyHolder.getExecsFolder());
 		execs = new ArrayList<Exec>();
-		
+		File folder = new File(propertyHolder.getExecsFolder());
 		for (File fileEntry : folder.listFiles()) {
-			Exec exec = new Exec(fileEntry.getName());
-			exec.setExecType(getExecTypeByExecName(fileEntry.getName()));
-			logger.info(exec.getExecName() + " " + exec.getExecType());
-			execs.add(exec);
+			if (fileEntry.getName().contains(".exe")) {
+				Exec exec = new Exec(fileEntry.getName());
+				String execType = getExecTypeByExecName(fileEntry.getName());
+				String[] split = execType.split(",");
+				logger.info(split.length + "");
+				List<String> allExecTypes = new ArrayList<String>();
+				for (int i = 0; i < split.length; i++) {
+					logger.info(split[i]);
+					allExecTypes.add(split[i]);
+				}
+				exec.setExecType(execType);
+				exec.setAllExecTypes(allExecTypes);
+				logger.info("Executabil:" + exec.getExecName() + " "
+						+ exec.getExecType());
+				execs.add(exec);
+			} else {
+				logger.info("Fisierul " + fileEntry.getName()
+						+ " nu este un executabil");
+			}
 		}
 	}
 	
