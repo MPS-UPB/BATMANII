@@ -3,7 +3,6 @@ package com.mps.batmanii.ocrWebManager.tests;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -23,6 +22,12 @@ import com.mps.batmanii.ocrWebManager.beans.SimpleType;
 import com.mps.batmanii.ocrWebManager.beans.XsdContainer;
 import com.mps.batmanii.ocrWebManager.beans.XsdFile;
 import com.mps.batmanii.ocrWebManager.business.ParserXsd;
+
+/**
+ * 
+ * clasa de test parsare Xsd
+ * 
+ */
 
 public class TestClassXsd {
 
@@ -50,10 +55,6 @@ public class TestClassXsd {
 		propertyHolderTest = new PropertyHolder();
 
 		Set<Entry<Object, Object>> entrySet = prop.entrySet();
-		/*
-		 * for (Entry<Object, Object> e : entrySet) {
-		 * logger.info(e.getKey().toString() + "=" + e.getValue().toString()); }
-		 */
 		for (Entry<Object, Object> e : entrySet) {
 			if ((e.getKey().toString()).compareTo("config.inputSchemasFolder") == 0) {
 				propertyHolderTest.setInputSchemasFolder(e.getValue()
@@ -74,7 +75,6 @@ public class TestClassXsd {
 		File folder = new File(propertyHolderTest.getInputSchemasFolder());
 
 		for (File fileEntry : folder.listFiles()) {
-			// logger.info(fileEntry.getAbsolutePath());
 			ParserXsd parserXsd = new ParserXsd();
 			XsdFile xsdFile = null;
 			try {
@@ -90,7 +90,11 @@ public class TestClassXsd {
 
 	}
 
-	/* metoda de test care afiseaza lungimea listei de scheme parsate */
+	/**
+	 * 
+	 * metoda de test care afiseaza lungimea listei de scheme parsate
+	 * 
+	 */
 	@Test
 	public void Test1() {
 		logger.info("-----------------Test1-----------------");
@@ -98,9 +102,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test1-----------------\n");
 	}
 
-	/* metode de test afisari fisiere Xsd parsate */
-
-	/* metoda de test afisare adjust brightness.xsd */
+	/**
+	 * 
+	 * metoda de test afisare adjust brightness.xsd
+	 * 
+	 */
 	@Test
 	public void Test2() {
 		logger.info("-----------------Test2-----------------");
@@ -146,7 +152,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test2-----------------\n");
 	}
 
-	/* metoda de test afisare adjust contrast.xsd */
+	/**
+	 * 
+	 * metoda de test afisare adjust contrast.xsd
+	 * 
+	 */
 	@Test
 	public void Test3() {
 		logger.info("-----------------Test3-----------------");
@@ -192,7 +202,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test3-----------------\n");
 	}
 
-	/* metoda de test afisare convert_pdf.xsd */
+	/**
+	 * 
+	 * metoda de test afisare convert_pdf.xsd
+	 * 
+	 */
 	@Test
 	public void Test4() {
 		logger.info("-----------------Test4-----------------");
@@ -238,7 +252,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test4-----------------\n");
 	}
 
-	/* metoda de test afisare crop.xsd */
+	/**
+	 * 
+	 * metoda de test afisare crop.xsd
+	 * 
+	 */
 	@Test
 	public void Test5() {
 		logger.info("-----------------Test5-----------------");
@@ -284,7 +302,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test5-----------------\n");
 	}
 
-	/* metoda de test afisare deskew.xsd */
+	/**
+	 * 
+	 * metoda de test afisare deskew.xsd
+	 * 
+	 */
 	@Test
 	public void Test6() {
 		logger.info("-----------------Test6-----------------");
@@ -330,7 +352,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test6-----------------\n");
 	}
 
-	/* metoda de test afisare hierarchy_analysis.xsd */
+	/**
+	 * 
+	 * metoda de test afisare hierarchy_analysis.xsd
+	 * 
+	 */
 	@Test
 	public void Test7() {
 		logger.info("-----------------Test7-----------------");
@@ -376,7 +402,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test7-----------------\n");
 	}
 
-	/* metoda de test afisare layout_analysis.xsd */
+	/**
+	 * 
+	 * metoda de test afisare layout_analysis.xsd
+	 * 
+	 */
 	@Test
 	public void Test8() {
 		logger.info("-----------------Test8-----------------");
@@ -422,7 +452,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test8-----------------\n");
 	}
 
-	/* metoda de test afisare otsu.xsd */
+	/**
+	 * 
+	 * metoda de test afisare otsu.xsd
+	 * 
+	 */
 	@Test
 	public void Test9() {
 		logger.info("-----------------Test9-----------------");
@@ -468,7 +502,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test9-----------------\n");
 	}
 
-	/* metoda de test afisare rotate.xsd */
+	/**
+	 * 
+	 * metoda de test afisare rotate.xsd
+	 * 
+	 */
 	@Test
 	public void Test10() {
 		logger.info("-----------------Test10-----------------");
@@ -514,7 +552,11 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test10-----------------\n");
 	}
 
-	/* metoda de test afisare tesseract.xsd */
+	/**
+	 * 
+	 * metoda de test afisare tesseract.xsd
+	 * 
+	 */
 	@Test
 	public void Test11() {
 		logger.info("-----------------Test11-----------------");
@@ -560,4 +602,471 @@ public class TestClassXsd {
 		logger.info("-----------------Finish Test11-----------------\n");
 	}
 
+	/**
+	 * 
+	 * metoda de test afisare bad1.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test24() {
+	 * logger.info("-----------------Test24-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(10).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(10).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(10).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(10).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(10).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(10).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(10).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(10).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(10).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test24-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad2.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test25() {
+	 * logger.info("-----------------Test25-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(11).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(11).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(11).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(11).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(11).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(11).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(11).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(11).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(11).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test25-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad3.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test26() {
+	 * logger.info("-----------------Test26-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(12).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(12).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(12).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(12).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(12).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(12).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(12).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(12).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(12).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test26-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad4.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test27() {
+	 * logger.info("-----------------Test27-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(13).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(13).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(13).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(13).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(13).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(13).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(13).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(13).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(13).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test27-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad5.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test28() {
+	 * logger.info("-----------------Test28-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(14).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(14).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(14).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(14).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(14).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(14).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(14).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(14).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(14).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test28-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad6.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test29() {
+	 * logger.info("-----------------Test29-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(15).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(15).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(15).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(15).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(15).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(15).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(15).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(15).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(15).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test29-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad7.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test30() {
+	 * logger.info("-----------------Test30-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(16).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(16).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(16).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(16).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(16).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(16).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(16).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(16).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(16).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test30-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad8.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test31() {
+	 * logger.info("-----------------Test31-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(17).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(17).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(17).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(17).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(17).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(17).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(17).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(17).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(17).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test31-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad9.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test32() {
+	 * logger.info("-----------------Test32-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(18).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(18).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(18).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(18).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(18).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(18).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(18).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(18).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(18).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test32-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad10.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test33() {
+	 * logger.info("-----------------Test33-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(19).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(19).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(19).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(19).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(19).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(19).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(19).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(19).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(19).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test33-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad11.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test34() {
+	 * logger.info("-----------------Test34-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(20).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(20).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(20).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(20).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(20).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(20).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(20).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(20).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(20).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test34-----------------\n"); }
+	 */
+
+	/**
+	 * 
+	 * metoda de test afisare bad12.xsd
+	 * 
+	 */
+	/*
+	 * @Test public void Test35() {
+	 * logger.info("-----------------Test35-----------------");
+	 * 
+	 * xsdFiles = xsdContainerTest.getXsdFiles();
+	 * 
+	 * logger.info(xsdFiles.get(21).getFileName() + "\n");
+	 * 
+	 * logger.info("SIMPLE TYPES\n"); if (xsdFiles.get(21).getSimpleTypes() !=
+	 * null) { List<SimpleType> simpleType = xsdFiles.get(21).getSimpleTypes();
+	 * for (int i = 0; i < simpleType.size(); i++)
+	 * logger.info(simpleType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO SIMPLE TYPES\n");
+	 * 
+	 * logger.info("COMPLEX TYPES\n"); if (xsdFiles.get(21).getComplexTypes() !=
+	 * null) { List<ComplexType> complexType =
+	 * xsdFiles.get(21).getComplexTypes(); for (int i = 0; i <
+	 * complexType.size(); i++) logger.info(complexType.get(i).toString());
+	 * logger.info("\n"); } else logger.info("NO COMPLEX TYPES\n");
+	 * 
+	 * logger.info("ELEMENT TYPES\n"); if (xsdFiles.get(21).getElementType() !=
+	 * null) { ElementType elementType = xsdFiles.get(21).getElementType();
+	 * logger.info(elementType.toString() + "\n"); } else
+	 * logger.info("NO ELEMENT TYPES\n");
+	 * 
+	 * logger.info("GROUP TYPES\n"); if (xsdFiles.get(21).getGroupTypes() !=
+	 * null) { List<GroupType> groupType = xsdFiles.get(21).getGroupTypes(); for
+	 * (int i = 0; i < groupType.size(); i++)
+	 * logger.info(groupType.get(i).toString()); logger.info("\n"); } else
+	 * logger.info("NO GROUP TYPES\n");
+	 * 
+	 * logger.info("-----------------Finish Test35-----------------\n"); }
+	 */
 }
