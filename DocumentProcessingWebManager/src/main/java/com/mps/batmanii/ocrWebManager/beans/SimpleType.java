@@ -8,8 +8,6 @@ public class SimpleType {
 	private String name = null;
 	private XSType base = null;
 	private Vector<String> enumeration = new Vector<String>();
-	// private String maxValue = null;
-	// private String minValue = null;
 	private String length = null;
 	private String maxLength = null;
 	private String minLength = null;
@@ -99,18 +97,6 @@ public class SimpleType {
 		this.enumeration = enumeration;
 	}
 
-	/*
-	 * public String getMaxValue() { return maxValue; }
-	 * 
-	 * 
-	 * public void setMaxValue(String maxValue) { this.maxValue = maxValue; }
-	 * 
-	 * 
-	 * public String getMinValue() { return minValue; }
-	 * 
-	 * 
-	 * public void setMinValue(String minValue) { this.minValue = minValue; }
-	 */
 
 	public String getLength() {
 		return length;

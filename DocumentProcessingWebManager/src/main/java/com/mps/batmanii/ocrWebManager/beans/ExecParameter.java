@@ -16,11 +16,8 @@ public class ExecParameter {
 	private int maxOccurs;
 	private boolean isAttribute = false;
 
-	private int level;/* rootElement are nivelul 0, iar apoi nivelul creste */
-	private List<ExecParameter> execParameters;/*
-												 * copii sau null in caz ca nu
-												 * mai are
-												 */
+	private int level;
+	private List<ExecParameter> execParameters;
 	private SimpleType simpleType;
 
 	public boolean isAttribute() {

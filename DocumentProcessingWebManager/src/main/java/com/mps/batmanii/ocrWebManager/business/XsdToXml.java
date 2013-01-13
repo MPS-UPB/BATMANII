@@ -39,6 +39,13 @@ public class XsdToXml {
 		this.xsdContainer = xsdContainer;
 	}
 
+	/**
+	 * Construieste o lista de ExecParameter dintr-un ComplexType
+	 * @param complexType
+	 * @param level
+	 * @param xsdFile
+	 * @return
+	 */
 	ArrayList<ExecParameter> parseComplexType(ComplexType complexType,
 			int level, XsdFile xsdFile) {
 
@@ -157,7 +164,13 @@ public class XsdToXml {
 		}
 		return null;
 	}
-
+	
+	  
+	/**
+	 *  construieste o lista de XmlElement dintr-un execParameter
+	 * @param execParameter
+	 * @return
+	 */
 	public ArrayList<XmlElement> parseExecParameter(ExecParameter execParameter) {
 		ArrayList<XmlElement> xmlElements = new ArrayList<XmlElement>();
 		xmlElements.add(new XmlElement(execParameter.getName(), null,

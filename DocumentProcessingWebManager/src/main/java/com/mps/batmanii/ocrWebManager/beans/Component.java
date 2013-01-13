@@ -9,7 +9,6 @@ public class Component {
 	private int maxOccurs;
 
 	public Component() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Component(String name, XSType xsType, int i, int j) {

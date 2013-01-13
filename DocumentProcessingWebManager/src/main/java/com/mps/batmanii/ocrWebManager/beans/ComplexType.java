@@ -21,7 +21,7 @@ public class ComplexType {
 
 	public ComplexType() {
 		elem = new LinkedList<ElementType>();
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public ComplexType(LinkedList<AttributeType> attributes) {
