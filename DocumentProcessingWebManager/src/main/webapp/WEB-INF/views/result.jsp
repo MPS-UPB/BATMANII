@@ -49,7 +49,7 @@
 						<td><br /> <br /></td>
 					</tr>
 					<tr>
-						<td><a class="button-1" href="/ocrwebmanager/">Click here
+						<td><a class="button-1" href="/ocrwebmanager/result/restartProcess">Click here
 								to begin a new processing</a></td>
 					</tr>
 				</table>
