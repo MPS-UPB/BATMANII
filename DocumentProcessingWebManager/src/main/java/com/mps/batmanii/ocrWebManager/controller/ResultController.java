@@ -516,5 +516,35 @@ public class ResultController {
 		}
 		return null;
 	}
+	
+	@RequestMapping(value = "/restartProcess")
+	public String restartProcess(Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		List<String> results = new ArrayList<String>();
+		File[] files = new File(propertyHolder.getResults()).listFiles();
+
+		for (File file : files) {
+			if (file.isFile()) {
+				file.delete();
+			}
+		}
+		files = new File(propertyHolder.getXmlFolder()).listFiles();
+		for (File file : files) {
+			if (file.isFile()) {
+				file.delete();
+			}
+		}
+		
+		files = new File(propertyHolder.getUploadedImagesFolder()).listFiles();
+		for (File file : files) {
+			if (file.isFile()) {
+				file.delete();
+			}
+		}
+		
+			
+		return "redirect:/";
+	}
 
 }
