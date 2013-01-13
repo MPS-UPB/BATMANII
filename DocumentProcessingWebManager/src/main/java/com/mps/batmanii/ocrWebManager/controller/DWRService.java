@@ -16,6 +16,12 @@ import com.mps.batmanii.ocrWebManager.beans.Exec;
 import com.mps.batmanii.ocrWebManager.beans.ExecContainer;
 import com.mps.batmanii.ocrWebManager.beans.SelectedExecs;
 
+/**
+ * Clasa folosita pentru apelurile dwr din interfata(javascript)
+ * 
+ * @author adela
+ * 
+ */
 @Service
 public class DWRService {
 
@@ -31,6 +37,14 @@ public class DWRService {
 	public DWRService() {
 	}
 
+	/**
+	 * Primeste ca parametru numele unui executabil si verifica daca acesta
+	 * poate fi selectat Intoarce un string cu mesajul ce trebuie afisat in
+	 * interfata
+	 * 
+	 * @param execName
+	 * @return
+	 */
 	public String verifySelected(String execName) {
 		Exec thisExec = getByExecName(execName);
 		List<Exec> execs = selectedExecs.getSelectedExecs();
@@ -76,6 +90,12 @@ public class DWRService {
 		return "Ok";
 	}
 
+	/**
+	 * Metoda care cauta un executabil dupa nume in execContainer
+	 * 
+	 * @param execName
+	 * @return
+	 */
 	public Exec getByExecName(String execName) {
 		List<Exec> execs = execContainer.getExecs();
 		for (Exec exec : execs) {
@@ -85,10 +105,11 @@ public class DWRService {
 		return null;
 	}
 
-	public boolean compareLists(List<String> l1, List<String> l2) {
-		return false;
-	}
-
+	/**
+	 * Metoda de afisare
+	 * 
+	 * @param l
+	 */
 	public void printList(List<String> l) {
 		for (int i = 0; i < l.size(); i++) {
 			logger.info(l.get(i));
@@ -96,6 +117,12 @@ public class DWRService {
 		logger.info("----------------------------------");
 	}
 
+	/**
+	 * Metoda care verifica daca executabilele au fost selectate corespunzator
+	 * Intoarce un string cu mesajul de eroare
+	 * 
+	 * @return
+	 */
 	public String verifySubmit() {
 
 		Map<Integer, List<Exec>> map = new HashMap<Integer, List<Exec>>();
@@ -186,6 +213,13 @@ public class DWRService {
 		return result;
 	}
 
+	/**
+	 * Metoda care returneaza tipul executabilul in functie de pozitia din
+	 * hashmap-ul in care e retinut
+	 * 
+	 * @param poz
+	 * @return
+	 */
 	public String getType(Integer poz) {
 		String result;
 		switch (poz) {
@@ -217,6 +251,11 @@ public class DWRService {
 		return result;
 	}
 
+	/**
+	 * Metoda de afisare
+	 * 
+	 * @param map
+	 */
 	public void printMap(Map<Integer, List<Exec>> map) {
 		logger.info("Print map-----------------------");
 		for (Map.Entry<Integer, List<Exec>> entry : map.entrySet()) {
@@ -231,32 +270,14 @@ public class DWRService {
 		logger.info("End print map-----------------------");
 	}
 
-	public static void main(String args[]) {
-		DWRService dwrService = new DWRService();
-		List<Exec> mySelectedExecs = new ArrayList<Exec>();
-		mySelectedExecs.add(dwrService.buildExec("rotate", "preprocessing"));
-		mySelectedExecs.add(dwrService.buildExec("crop", "preprocessing"));
-		// mySelectedExecs.add(dwrService.buildExec("otsu", "binarization"));
-		// mySelectedExecs.add(dwrService.buildExec("otsu1", "binarization"));
-		mySelectedExecs.add(dwrService.buildExec("full_layout", "layout"));
-		// mySelectedExecs.add(dwrService.buildExec("paging", "paging"));
-		// mySelectedExecs.add(dwrService.buildExec("tesseract", "ocr"));
-		// mySelectedExecs
-		// .add(dwrService.buildExec("full_hierarchy", "hierarchy"));
-		// mySelectedExecs.add(dwrService.buildExec("pdf", "pdf-exporter"));
-		dwrService.selectedExecs = new SelectedExecs();
-		dwrService.selectedExecs.setSelectedExecs(mySelectedExecs);
-		logger.info("Rezultat: " + dwrService.verifySubmit());
-	}
-
-	public Exec buildExec(String execName, String execType) {
-		Exec exec = new Exec();
-		exec.setExecName(execName);
-		exec.setExecType(execType);
-		return exec;
-	}
 }
 
+/**
+ * Clasa comparator
+ * 
+ * @author adela
+ * 
+ */
 class CustomComparator implements Comparator<String> {
 	@Override
 	public int compare(String o1, String o2) {

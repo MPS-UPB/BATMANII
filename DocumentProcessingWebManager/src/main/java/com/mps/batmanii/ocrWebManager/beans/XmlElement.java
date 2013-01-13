@@ -1,11 +1,11 @@
 package com.mps.batmanii.ocrWebManager.beans;
 
 /**
+ * Clasa bean ce contine toate informatiile necesare crearii de xml-uri.
  * 
  * @author Adela
  * 
  */
-
 public class XmlElement {
 	private String name;
 	private String value;
@@ -19,14 +19,12 @@ public class XmlElement {
 		super();
 	}
 
-	
 	@Override
 	public String toString() {
 		return "XmlElement [name=" + name + ", value=" + value + ", attribute="
 				+ attribute + ", level=" + level + ", simpleType=" + simpleType
 				+ ", minOccurs=" + minOccurs + ", maxOccurs=" + maxOccurs + "]";
 	}
-
 
 	public XmlElement(String name, String value, boolean attribute, int level,
 			SimpleType simpleType, int minOccurs, int maxOccurs) {
@@ -39,7 +37,6 @@ public class XmlElement {
 		this.minOccurs = minOccurs;
 		this.maxOccurs = maxOccurs;
 	}
-
 
 	public String getName() {
 		return name;
