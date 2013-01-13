@@ -12,6 +12,8 @@ import com.mps.batmanii.ocrWebManager.beans.PropertyHolder;
 import com.mps.batmanii.ocrWebManager.beans.XsdContainer;
 
 import com.mps.batmanii.ocrWebManager.beans.UploadItem;
+import com.mps.batmanii.ocrWebManager.business.FoldersCreator;
+
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -22,10 +24,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletConfig;
 import java.io.FileOutputStream;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import javax.servlet.http.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.xml.sax.SAXException;
 
 /**
  * Clasa controller pentru pagina "index.jsp"
@@ -115,5 +119,18 @@ public class IndexController {
 		}
 		return "index";
 	}
+	
+	@RequestMapping("/reinitialize")
+	public String delete(Model model,
+			HttpSession session) throws SAXException, IOException {
+		
 
+
+		execContainer.restart();
+		xsdContainer.restart();
+			
+		
+		
+		return "redirect:/";
+	}
 }
