@@ -1,5 +1,7 @@
 package com.mps.batmanii.ocrWebManager.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,23 +18,20 @@ import org.springframework.validation.ObjectError;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import javax.servlet.ServletConfig;
 import java.io.FileOutputStream;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import javax.servlet.http.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.xml.sax.SAXException;
 
 /**
  * Clasa controller pentru pagina "index.jsp"
  * 
  * @author Flavia
- * @author Andrei
- * @author Cosmin
+ * 
  */
 
 @Controller
@@ -47,6 +46,9 @@ public class IndexController {
 
 	@Autowired
 	ExecContainer execContainer;
+
+	private final static Logger logger = LoggerFactory
+			.getLogger(OCRController.class);
 
 	private String uploadFolderPath;
 	ServletConfig config;
@@ -71,16 +73,16 @@ public class IndexController {
 			HttpSession session) {
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
-				System.err.println("Error: " + error.getCode() + " - "
+				logger.info("Error: " + error.getCode() + " - "
 						+ error.getDefaultMessage());
 			}
 			return "index";
 		}
 
-		System.err.println("-------------------------------------------");
-		System.err.println("Test upload: "
+		logger.info("-------------------------------------------");
+		logger.info("Test upload: "
 				+ uploadItem.getFileData().getOriginalFilename());
-		System.err.println("-------------------------------------------");
+		logger.info("-------------------------------------------");
 		try {
 			MultipartFile file = uploadItem.getFileData();
 			String fileName = null;
@@ -89,14 +91,14 @@ public class IndexController {
 			if (file.getSize() > 0) {
 				inputStream = file.getInputStream();
 				if (file.getSize() > 600000) {
-					System.out.println("File Size:::" + file.getSize());
+					logger.info("File Size:::" + file.getSize());
 					return "index";
 				}
-				System.out.println("size::" + file.getSize());
+				logger.info("size::" + file.getSize());
 				fileName = propertyHolder.getUploadedImagesFolder()
 						+ file.getOriginalFilename();
 				outputStream = new FileOutputStream(fileName);
-				System.out.println("fileName:" + file.getOriginalFilename());
+				logger.info("fileName:" + file.getOriginalFilename());
 
 				int readBytes = 0;
 				byte[] buffer = new byte[10000];
@@ -107,22 +109,11 @@ public class IndexController {
 				inputStream.close();
 			}
 
-			// ..........................................
 			session.setAttribute("uploadFile", file.getOriginalFilename());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "index";
-	}
-
-	@RequestMapping("/reinitialize")
-	public String reinitialize(Model model, HttpSession session)
-			throws SAXException, IOException {
-
-		execContainer.restart();
-		xsdContainer.restart();
-
-		return "redirect:/";
 	}
 
 }
