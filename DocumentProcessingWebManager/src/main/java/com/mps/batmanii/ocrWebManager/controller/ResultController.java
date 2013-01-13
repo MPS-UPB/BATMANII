@@ -101,7 +101,6 @@ public class ResultController {
 					tip = 1; /* returneaza xml*/
 				}
 			}
-			logger.info("pula mea " + tip);
 			if (index_xml == 0) {
 				/* pentru fiecare imagine din fileUploadFolder */
 				for (int fileCounter = 0; fileCounter < listaFisiere.size(); fileCounter++) {
