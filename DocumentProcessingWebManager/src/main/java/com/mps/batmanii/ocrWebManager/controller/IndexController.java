@@ -12,8 +12,6 @@ import com.mps.batmanii.ocrWebManager.beans.PropertyHolder;
 import com.mps.batmanii.ocrWebManager.beans.XsdContainer;
 
 import com.mps.batmanii.ocrWebManager.beans.UploadItem;
-import com.mps.batmanii.ocrWebManager.business.FoldersCreator;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -35,6 +33,8 @@ import org.xml.sax.SAXException;
  * Clasa controller pentru pagina "index.jsp"
  * 
  * @author Flavia
+ * @author Comy
+ * @author Andrei
  * 
  */
 
@@ -65,12 +65,28 @@ public class IndexController {
 		this.uploadFolderPath = uploadFolderPath;
 	}
 
+	/**
+	 * Metoda care intoarce view-ul index.jsp
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String displayFileUploadFormPage(Model model) {
 		model.addAttribute(new UploadItem());
 		return "index";
 	}
 
+	/**
+	 * Metoda pentru upload de imagini
+	 * 
+	 * @param uploadItem
+	 * @param result
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(UploadItem uploadItem, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response,
@@ -119,18 +135,23 @@ public class IndexController {
 		}
 		return "index";
 	}
-	
-	@RequestMapping("/reinitialize")
-	public String delete(Model model,
-			HttpSession session) throws SAXException, IOException {
-		
 
+	/**
+	 * Metoda pentru reinitializarea containerelor
+	 * 
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	@RequestMapping("/reinitialize")
+	public String delete(Model model, HttpSession session) throws SAXException,
+			IOException {
 
 		execContainer.restart();
 		xsdContainer.restart();
-			
-		
-		
+
 		return "redirect:/";
 	}
 }

@@ -35,8 +35,10 @@ import com.sun.xml.xsom.XSRestrictionSimpleType;
 
 public class ParserXsd {
 	/**
-	 * Parseaza un fisier xsd 
-	 * @param filename =numele fisierul xsd
+	 * Parseaza un fisier xsd
+	 * 
+	 * @param filename
+	 *            =numele fisierul xsd
 	 * @return XsdFile
 	 * @throws SAXException
 	 */
@@ -67,7 +69,7 @@ public class ParserXsd {
 			XSComplexType ct = (XSComplexType) ctiter.next();
 			complexTypes.add(printElements(ct));
 		}
-			Map<String, com.sun.xml.xsom.XSSimpleType> simpleTypes = gtypesSchema
+		Map<String, com.sun.xml.xsom.XSSimpleType> simpleTypes = gtypesSchema
 				.getSimpleTypes();
 		Set<Entry<String, com.sun.xml.xsom.XSSimpleType>> entrySet = simpleTypes
 				.entrySet();
@@ -77,7 +79,7 @@ public class ParserXsd {
 					.add(parseSimpleType(((Entry<String, com.sun.xml.xsom.XSSimpleType>) array[i])
 							.getValue()));
 		}
-	
+
 		gtypesSchema.getElementDecls();
 		Map<String, XSElementDecl> elementDecls = gtypesSchema
 				.getElementDecls();
@@ -103,7 +105,8 @@ public class ParserXsd {
 	}
 
 	/**
-	 * parseaza un tag simpletype 
+	 * parseaza un tag simpletype
+	 * 
 	 * @param aux
 	 * @return SimpleType
 	 */
@@ -157,9 +160,10 @@ public class ParserXsd {
 	}
 
 	/**
-	 * Parseaza atributele unui complex type 
+	 * Parseaza atributele unui complex type
+	 * 
 	 * @param xsComplexType
-	 * @return o lista de atribute 
+	 * @return o lista de atribute
 	 */
 	private LinkedList<AttributeType> getAttributes(XSComplexType xsComplexType) {
 		LinkedList<AttributeType> listAttribute = new LinkedList<AttributeType>();
@@ -176,8 +180,10 @@ public class ParserXsd {
 	}
 
 	/**
-	 * parseaza un tag de tipul group din xsd 
-	 * @param xsModelGroup : tagul ca xsModelGroup
+	 * parseaza un tag de tipul group din xsd
+	 * 
+	 * @param xsModelGroup
+	 *            : tagul ca xsModelGroup
 	 * @return GroupType
 	 */
 	private GroupType parseGroup(XSModelGroup xsModelGroup) {
@@ -208,9 +214,11 @@ public class ParserXsd {
 	}
 
 	/**
-	 * Parseaza un tag de tipul complex type 
-	 * @param xsComplexType = Tagul complex type 
-	 * @return = element de tipul {@link ComplexType} 
+	 * Parseaza un tag de tipul complex type
+	 * 
+	 * @param xsComplexType
+	 *            = Tagul complex type
+	 * @return = element de tipul {@link ComplexType}
 	 */
 	private ComplexType printElements(XSComplexType xsComplexType) {
 
@@ -275,5 +283,4 @@ public class ParserXsd {
 		return complexTag;
 	}
 
-	
 }

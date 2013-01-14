@@ -4,6 +4,12 @@ import java.util.Vector;
 
 import com.sun.xml.xsom.XSType;
 
+/**
+ * Clasa pentru elementele de tip simpleType din schema .xsd
+ * 
+ * @author Bersy
+ * 
+ */
 public class SimpleType {
 	private String name = null;
 	private XSType base = null;
@@ -96,7 +102,6 @@ public class SimpleType {
 	public void setEnumeration(Vector<String> enumeration) {
 		this.enumeration = enumeration;
 	}
-
 
 	public String getLength() {
 		return length;

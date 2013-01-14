@@ -2,6 +2,12 @@ package com.mps.batmanii.ocrWebManager.beans;
 
 import java.util.LinkedList;
 
+/**
+ * Clasa pentru elementele de tip group din schema .xsd
+ * 
+ * @author Bersy
+ * 
+ */
 public class GroupType {
 	LinkedList<ElementType> elem = null;
 

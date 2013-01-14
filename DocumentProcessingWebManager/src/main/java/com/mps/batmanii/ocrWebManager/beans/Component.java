@@ -2,6 +2,12 @@ package com.mps.batmanii.ocrWebManager.beans;
 
 import com.sun.xml.xsom.XSType;
 
+/**
+ * Clasa pentru elementele de tip component din schema .xsd
+ * 
+ * @author Bersy
+ * 
+ */
 public class Component {
 	private String name = null;
 	private XSType type = null;

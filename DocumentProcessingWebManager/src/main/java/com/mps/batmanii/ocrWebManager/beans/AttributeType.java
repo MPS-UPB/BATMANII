@@ -3,6 +3,12 @@ package com.mps.batmanii.ocrWebManager.beans;
 import com.sun.xml.xsom.XSSimpleType;
 import com.sun.xml.xsom.XmlString;
 
+/**
+ * Clasa pentru elementele de tip atribut din schema .xsd
+ * 
+ * @author Bersy
+ * 
+ */
 public class AttributeType {
 	private String name = null;
 	private XSSimpleType type = null;

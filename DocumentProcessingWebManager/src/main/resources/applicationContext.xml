@@ -40,6 +40,9 @@
 	</bean>
 
 	<!-- singletons in application -->
+	<bean id="foldersCreator" class="com.mps.batmanii.ocrWebManager.business.FoldersCreator">
+	</bean>
+
 	<bean id="xsdContainer" class="com.mps.batmanii.ocrWebManager.beans.XsdContainer">
 	</bean>
 

@@ -2,6 +2,12 @@ package com.mps.batmanii.ocrWebManager.beans;
 
 import java.util.LinkedList;
 
+/**
+ * Clasa pentru elementele de tip compleType din schema .xsd
+ * 
+ * @author Bersy
+ * 
+ */
 public class ComplexType {
 	private LinkedList<AttributeType> attribute = null;
 	private LinkedList<ElementType> elem = null;
@@ -21,7 +27,7 @@ public class ComplexType {
 
 	public ComplexType() {
 		elem = new LinkedList<ElementType>();
-	
+
 	}
 
 	public ComplexType(LinkedList<AttributeType> attributes) {

@@ -1,5 +1,11 @@
 package com.mps.batmanii.ocrWebManager.beans;
 
+/**
+ * Clasa pentru elementele de tip element din schema .xsd
+ * 
+ * @author Bersy
+ * 
+ */
 public class ElementType {
 	private ComplexType complexType = null;
 	private SimpleType simpleType = null;

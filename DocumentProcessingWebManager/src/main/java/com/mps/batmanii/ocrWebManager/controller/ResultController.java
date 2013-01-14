@@ -38,7 +38,8 @@ import com.mps.batmanii.ocrWebManager.business.CreateXml;
  * Clasa controller pentru pagina "result.jsp"
  * 
  * @author Flavia
- * 
+ * @author Comy
+ * @author Andrei
  */
 
 @Controller
@@ -62,7 +63,12 @@ public class ResultController {
 	private final static Logger logger = LoggerFactory
 			.getLogger(OCRController.class);
 
-	/* functie care returneaza lista de fisiere din folderul specificat de path */
+	/**
+	 * Metoda care returneaza lista de fisiere din folderul specificat de path
+	 * 
+	 * @param path
+	 * @return
+	 */
 	public Vector<String> listFile(String path) {
 		Vector<String> folderFiles = new Vector<String>();
 		File folder = new File(path);
@@ -76,6 +82,13 @@ public class ResultController {
 		return folderFiles;
 	}
 
+	/**
+	 * Metoda care intoarce view-ul result.jsp, realizeaza procesarea si ofera
+	 * rezultatele pentru download
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("")
 	public String display(Model model) {
 		List<XmlFile> fisiereXml = new ArrayList<XmlFile>();
@@ -92,13 +105,13 @@ public class ResultController {
 					.contentEquals("binarization")
 					|| fisiereXml.get(index_xml).getExecType()
 							.contentEquals("preprocessing")) {
-				tip = 0; /* returneaza poza*/
+				tip = 0; /* returneaza poza */
 			} else {
 				if (fisiereXml.get(index_xml).getExecType()
 						.contentEquals("pdf-exporter")) {
-					tip = 2; /* returneaza pdf*/
+					tip = 2; /* returneaza pdf */
 				} else {
-					tip = 1; /* returneaza xml*/
+					tip = 1; /* returneaza xml */
 				}
 			}
 			if (index_xml == 0) {
@@ -215,7 +228,7 @@ public class ResultController {
 						}
 					}
 				}
-			
+
 				if (ok == 1) {
 					/* pentru fiecare rezultat de la pasul anterior */
 					for (int fileCounter = 0; fileCounter < outputEtapaPrecedenta
@@ -316,8 +329,7 @@ public class ResultController {
 								baos.write(c);
 							}
 							String response = new String(baos.toByteArray());
-							logger.info("Response From Exe : "
-									+ response);
+							logger.info("Response From Exe : " + response);
 						} catch (Exception e) {
 							System.out.println(e);
 							e.printStackTrace();
@@ -326,7 +338,7 @@ public class ResultController {
 				} else {
 					for (int i = 0; i < fisiereXml.get(index_xml)
 							.getXmlElements().size(); i++) {
-						
+
 						if (fisiereXml.get(index_xml).getXmlElements().get(i)
 								.getName().equals("inputFile")) {
 							fisiereXml.get(index_xml).getXmlElements()
@@ -483,6 +495,15 @@ public class ResultController {
 		return "result";
 	}
 
+	/**
+	 * Metoda pentru download
+	 * 
+	 * @param fileName
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/download")
 	public String download(String fileName, Model model,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -516,12 +537,20 @@ public class ResultController {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Metoda pentru reintoarcerea la pagina principala pentru a incepe o noua
+	 * procesare, stergand fisierele create in etapa precedenta
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/restartProcess")
-	public String restartProcess(Model model,
-			HttpServletRequest request, HttpServletResponse response) {
-		
-		List<String> results = new ArrayList<String>();
+	public String restartProcess(Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		File[] files = new File(propertyHolder.getResults()).listFiles();
 
 		for (File file : files) {
@@ -535,15 +564,14 @@ public class ResultController {
 				file.delete();
 			}
 		}
-		
+
 		files = new File(propertyHolder.getUploadedImagesFolder()).listFiles();
 		for (File file : files) {
 			if (file.isFile()) {
 				file.delete();
 			}
 		}
-		
-			
+
 		return "redirect:/";
 	}
 
